@@ -2,21 +2,43 @@ import http from "http";
 import fs from "fs";
 import path from "path";
 import {API, Endpoints} from "./api";
+import {APILog} from "./models";
+import {serverLog} from "./log";
 
 const PORT = 8080;
 
-http.createServer(function (request, response) {
-    console.log('request ', request.url);
-    const url = request.url;
+http.createServer(async function (request, response) {
+    console.log(`request ${request.url} ${new Date()}`);
 
-    let filePath = '.' + request.url;
+    const url = request.url;
+    const currentPath = new URL(`http://localhost${url}`).pathname;
+
+
+    let filePath = '.' + currentPath;
     if (filePath == './' || filePath == './home') {
         filePath = './index.html';
     }
 
+    const startTime = new Date().getTime();
+
     /* API */
-    if (url === Endpoints.TEST) {
-        API.test(request, response);
+    if (currentPath === Endpoints.DATA) {
+        await API.data(request, response);
+
+        const endTime = new Date().getTime();
+        const latency = endTime - startTime;
+
+        serverLog.add(new APILog(request, response, latency));
+        return;
+    }
+
+    if (currentPath === Endpoints.LOGS) {
+        await API.metrics(request, response);
+
+        const endTime = new Date().getTime();
+        const latency = endTime - startTime;
+
+        serverLog.add(new APILog(request, response, latency));
         return;
     }
 
@@ -52,6 +74,11 @@ http.createServer(function (request, response) {
             response.end(content, 'utf-8');
         }
     });
+
+    const endTime = new Date().getTime();
+    const latency = endTime - startTime;
+
+    serverLog.add(new APILog(request, response, latency));
 
 }).listen(PORT);
 

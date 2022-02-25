@@ -2,11 +2,65 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <title>Homework 1</title>
 
-Ana are mere
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="container">
+
+<div class="container">
+    <div>
+        <label for="key">API Key</label>
+        <input id="key" type="text" value="98NSjZdbXOELcaQn">
+    </div>
+
+    <div>
+        <button onclick="onGetData()">Get Data</button>
+    </div>
+
+    <div class="error" id="error"></div>
+
+    <div id="api-data">
+
+    </div>
+
+</div>
+
+<div class="container">
+    <div>
+        <button onclick="stressTest()">Stress Test</button>
+    </div>
+
+    <div class="flex-column">
+        <div>Requests send : <span id="str-requests"></span></div>
+        <div>Successful requests : <span id="str-success"></span></div>
+        <div>Unsuccessful requests : <span id="str-fail"></span></div>
+    </div>
+
+    <div>Time: <div id="str-time"></div></div>
+    <div id="str-done"></div>
+
+</div>
+
+<div class="container">
+    <div>
+        Metrics
+    </div>
+
+    <div>
+        <button onclick="onGetMetrics()">Metrics</button>
+    </div>
+
+    <div class="list-auto overflow" id="metrics">
+
+    </div>
+</div>
+
+
+<script src="main.js"></script>
 
 </body>
 </html>
