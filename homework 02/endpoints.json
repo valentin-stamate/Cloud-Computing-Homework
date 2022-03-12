@@ -1,0 +1,271 @@
+{
+	"info": {
+		"_postman_id": "64678623-7884-45c6-a4f6-10983fb7d623",
+		"name": "CC Homework 02",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Movies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/api/movie",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"movie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Movie",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Alladin\",\r\n    \"year\": 2018,\r\n    \"genre\": \"animation\",\r\n    \"rating\": 9.3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/movie",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"movie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Movie",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Alladin\",\r\n    \"year\": 2018,\r\n    \"rating\": 9.3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/movie/1",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"movie",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Movie",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Alladin\",\r\n    \"year\": 2018,\r\n    \"rating\": 9.3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/movie/1",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"movie",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Movie Actor",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Alladin\",\r\n    \"year\": 2018,\r\n    \"rating\": 9.3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/movie/1/actor/2",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"movie",
+						"1",
+						"actor",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Movie Actor",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Alladin\",\r\n    \"year\": 2018,\r\n    \"rating\": 9.3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/movie/1/actor/1",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"movie",
+						"1",
+						"actor",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/api/actor",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"actor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Jack\",\r\n    \"age\": 50\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/actor",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"actor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actor",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Jack\",\r\n    \"age\": 54\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/actor/3",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"actor",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actor",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Jack\",\r\n    \"age\": 54\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/actor/1",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"actor",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
