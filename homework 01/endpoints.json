@@ -1,0 +1,146 @@
+{
+	"info": {
+		"_postman_id": "ad90ead3-b01d-42f8-ace3-de253102c8bc",
+		"name": "CC Homework 01",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Main Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/data?key=98NSjZdbXOELcaQn",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"data"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "98NSjZdbXOELcaQn"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Api Three",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.reddit.com/search.json?q=Romania&limit=10&sort=top",
+					"protocol": "http",
+					"host": [
+						"www",
+						"reddit",
+						"com"
+					],
+					"path": [
+						"search.json"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "Romania"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "sort",
+							"value": "top"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API One",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.ip2loc.com/DzqiNo6EVEIYVroAjhvlWLSwgm6qIXr4/detect",
+					"protocol": "https",
+					"host": [
+						"api",
+						"ip2loc",
+						"com"
+					],
+					"path": [
+						"DzqiNo6EVEIYVroAjhvlWLSwgm6qIXr4",
+						"detect"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API Two",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.randomnumberapi.com/api/v1.0/random?min=1&max=20",
+					"protocol": "http",
+					"host": [
+						"www",
+						"randomnumberapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1.0",
+						"random"
+					],
+					"query": [
+						{
+							"key": "min",
+							"value": "1"
+						},
+						{
+							"key": "max",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Metrics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/metrics?key=98NSjZdbXOELcaQn",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"metrics"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "98NSjZdbXOELcaQn"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
