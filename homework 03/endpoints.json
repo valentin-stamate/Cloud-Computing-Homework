@@ -1,0 +1,258 @@
+{
+	"info": {
+		"_postman_id": "fb51b574-d05c-4fdb-9de0-91ce96ccaba4",
+		"name": "CC Homework 03",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/test",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Copy",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "scope",
+							"value": "https://www.googleapis.com/auth/cloud-platform",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "{{clientSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "{{clientId}}",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://accounts.google.com/o/oauth2/token",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "https://accounts.google.com/o/oauth2/auth",
+							"type": "string"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://www.getpostman.com/oauth2/callback",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "GCP Token",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Posts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Hello Cat",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "A cat wan's to cross the road",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/Valentin/Desktop/cat-image.jpg"
+						},
+						{
+							"key": "breed",
+							"value": "stray",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/posts/uHtNnjnuNHvslPeB",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"posts",
+						"uHtNnjnuNHvslPeB"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Posts Filter",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Hello Cat",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "A cat wan's to cross the road",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/Valentin/Desktop/cat-image.jpg"
+						},
+						{
+							"key": "breed",
+							"value": "stray",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/posts?search=Hello Cat",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"posts"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "Hello Cat"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Posts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Cat with thumbs",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "A cat wan's to cross the road",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/Valentin/Desktop/cat-image.jpg"
+						},
+						{
+							"key": "breed",
+							"value": "stray",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/posts",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "clientId",
+			"value": "1025453389517-4rg9fe7d40bc1pl9klvuhj23eoohsd91.apps.googleusercontent.com",
+			"type": "string"
+		},
+		{
+			"key": "clientSecret",
+			"value": "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",
+			"type": "string"
+		},
+		{
+			"key": "apiKey",
+			"value": "AIzaSyBPLvTyU9FmO2FEhlC8C3dQit5aC4YU4T8",
+			"type": "string"
+		}
+	]
+}

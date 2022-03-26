@@ -1,0 +1,2 @@
+# Resources
+* Auth Keys : https://cloud.google.com/iam/docs/creating-managing-service-account-keys
