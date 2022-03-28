@@ -77,4 +77,87 @@ export class Controller {
         res.end('');
     }
 
+    static async deleteCatPost(req: Request<any>, res: Response, next: NextFunction) {
+        const postId = req.params.postId;
+
+        const post = await FirestoreService.readData('posts', postId);
+        const postData = post.data();
+
+        res.header('Content-type', 'application/json');
+
+        if (postData === undefined) {
+            res.statusCode = StatusCode.NOT_FOUND;
+            res.end('');
+            return;
+        }
+
+        await FirestoreService.deletePost('posts', postId);
+        res.statusCode = StatusCode.OK;
+        res.end(JSON.stringify({message: "Post deleted"}));
+    }
+
+    static async updateCatPost(req: Request<any>, res: Response, next: NextFunction) {
+        const postId = req.params.postId;
+        const post = await FirestoreService.readData('posts', postId);
+        const postData = post.data();
+        
+        var statusCode, data : CatPost;
+        if (postData === undefined) {
+            if (!req.files) {
+                res.statusCode = StatusCode.BAD_REQUEST;
+                res.end('');
+                return;
+            }
+    
+            const image = req.files.image as UploadedFile;
+            const split = image.name.split('.');
+    
+            let extension = '';
+            if (split.length !== 0) {
+                extension = split[split.length - 1];
+            }
+    
+            const filename = `${UtilService.generateRandomString(16)}.${extension}`;
+            const fileUrl = await StoreService.uploadFile(image.data, filename);
+    
+            data = {...req.body, creationDate: new Date(), image: fileUrl};
+    
+            if (!data.description || !data.name || !data.breed) {
+                next(new ResponseError(ResponseMessages.INCOMPLETE_FORM, StatusCode.BAD_REQUEST));
+                return;
+            }
+
+            statusCode = StatusCode.CREATED;
+            res.setHeader('Location', `${Endpoints.POSTS}/${postId}`);
+
+        }else{
+            var fileUrl;
+            if (req.files) {
+                
+                const image = req.files.image as UploadedFile;
+                const split = image.name.split('.');
+        
+                let extension = '';
+                if (split.length !== 0) {
+                    extension = split[split.length - 1];
+                }
+        
+                const filename = `${UtilService.generateRandomString(16)}.${extension}`;
+                fileUrl = await StoreService.uploadFile(image.data, filename);
+            }else{
+                fileUrl = postData.image;
+            }
+            data = {...req.body, creationDate: postData.creationDate, image: fileUrl};
+            data.breed = data.breed ? data.breed : postData.breed;
+            data.name = data.name ? data.name : postData.name;
+            data.description = data.description ? data.description : postData.description;
+    
+            statusCode = StatusCode.OK;
+        }
+
+        await FirestoreService.addData(postId, 'posts', data);
+    
+        res.statusCode = statusCode;
+        res.end('');
+    }
 }

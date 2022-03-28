@@ -26,5 +26,8 @@ export class FirestoreService {
 
         return list;
     }
+    static async deletePost(collection: string, id: string) {
+        return await firestore.collection(collection).doc(id).delete();
+    }
 
 }
