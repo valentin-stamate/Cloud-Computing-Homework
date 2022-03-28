@@ -7,6 +7,8 @@ import {StoreService} from "./store";
 import {FirestoreService} from "./firestore";
 import {ResponseError} from "./middlewares";
 import {Endpoints} from "./endpoints";
+import {TranslateService} from "./translate";
+import {VisionService} from "./vision";
 
 export class Controller {
 
@@ -159,5 +161,60 @@ export class Controller {
     
         res.statusCode = statusCode;
         res.end('');
+    }
+
+    static async translatePost(req: Request<any>, res: Response, next: NextFunction) {
+        const postId = req.params.postId;
+        let language = req.query.lang as string;
+
+
+        const post = await FirestoreService.readData('posts', postId);
+        let postData = post.data();
+
+        res.header('Content-type', 'application/json');
+
+        if (postData === undefined) {
+            res.statusCode = StatusCode.NOT_FOUND;
+            res.end('');
+            return;
+        }
+        if (language !== undefined) {
+            language = language.toLowerCase();
+        }else{
+            language="ro";
+        }
+
+        const nameArray = await TranslateService.translateText(postData.name, language);
+        postData.name = nameArray[0];
+
+        const descriptionArray = await TranslateService.translateText(postData.description, language);
+        postData.description = descriptionArray[0];
+
+        const breedArray = await TranslateService.translateText(postData.breed, language);
+        postData.breed = breedArray[0];
+
+        res.statusCode = StatusCode.OK;
+        res.end(JSON.stringify(postData));
+    }
+
+    static async labelImage(req: Request<any>, res: Response, next: NextFunction) {
+        const postId = req.params.postId;
+
+        const post = await FirestoreService.readData('posts', postId);
+        let postData = post.data();
+
+        res.header('Content-type', 'application/json');
+
+        if (postData === undefined) {
+            res.statusCode = StatusCode.NOT_FOUND;
+            res.end('');
+            return;
+        }
+
+        const labels = await VisionService.labelImage(postData.image);
+        postData.tags = labels;
+
+        res.statusCode = StatusCode.OK;
+        res.end(JSON.stringify(postData));
     }
 }
