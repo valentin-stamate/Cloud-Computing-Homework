@@ -1,27 +1,10 @@
 {
 	"info": {
-		"_postman_id": "fb51b574-d05c-4fdb-9de0-91ce96ccaba4",
+		"_postman_id": "4d49a2c4-a8ac-46f0-8e49-8310b3de1bfe",
 		"name": "CC Homework 03",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
-			"name": "Test",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/test",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"test"
-					]
-				}
-			},
-			"response": []
-		},
 		{
 			"name": "Test Copy",
 			"request": {
@@ -196,7 +179,7 @@
 						{
 							"key": "image",
 							"type": "file",
-							"src": "/C:/Users/Valentin/Desktop/cat-image.jpg"
+							"src": "/C:/Users/ilogofatu/Downloads/cats.jpg"
 						},
 						{
 							"key": "breed",
@@ -212,6 +195,109 @@
 					],
 					"path": [
 						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Cat with thumbsUP",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "A cat wan's to cross the road. HAHAHA",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/ilogofatu/Downloads/cats.jpg"
+						},
+						{
+							"key": "breed",
+							"value": "stray",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/posts/Wrnxo2fCweaHY6xI3",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"posts",
+						"Wrnxo2fCweaHY6xI3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Post",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/posts/FsTOXb3OeEgfnESH",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"posts",
+						"FsTOXb3OeEgfnESH"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Translate Post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/translate/2T7C6HA3wXLiKcfc?lang=es",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"translate",
+						"2T7C6HA3wXLiKcfc"
+					],
+					"query": [
+						{
+							"key": "lang",
+							"value": "es"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tag Post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/tag/2T7C6HA3wXLiKcfc",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"tag",
+						"2T7C6HA3wXLiKcfc"
 					]
 				}
 			},
@@ -253,6 +339,11 @@
 			"key": "apiKey",
 			"value": "AIzaSyBPLvTyU9FmO2FEhlC8C3dQit5aC4YU4T8",
 			"type": "string"
+		},
+		{
+			"key": "host",
+			"value": "localhost:8080",
+			"type": "default"
 		}
 	]
 }
