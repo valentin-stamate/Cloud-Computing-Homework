@@ -3,7 +3,7 @@ import {Controller} from "./controller";
 import {Endpoints} from "./endpoints";
 import fileUpload from "express-fileupload";
 import {Middleware} from "./middlewares";
-
+import cors from 'cors';
 
 const app = express();
 const port = 8080;
@@ -12,6 +12,8 @@ const host = `http://localhost:${port}`
 app.get('/', (req, res) => {
     res.end('Hello word!')
 });
+
+app.use(cors({origin: ['http://localhost:4200']}));
 
 app.use(express.json());
 app.use(fileUpload());
