@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
     res.end('Hello word!')
 });
 
-app.use(cors({origin: ['http://localhost:4200']}));
+app.use(cors({origin: ['http://localhost:4200', 'https://cloud-computing-cce1f.web.app']}));
 
 app.use(express.json());
 app.use(fileUpload());
