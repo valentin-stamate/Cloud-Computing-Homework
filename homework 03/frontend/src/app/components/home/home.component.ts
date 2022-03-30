@@ -2,29 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import {CatPost} from "../../service/models";
 import axios from "axios";
 import {Endpoints} from "../../service/endpoints";
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
+
+
 export class HomeComponent implements OnInit {
   loading = false;
-
-  posts: CatPost[] = [{
-    name: 'dasdad',
-    description: 'lorem ipsum dolor sit amed',
-    image: 'https://www.rd.com/wp-content/uploads/2021/01/GettyImages-1175550351.jpg',
-    breed: 'siamese',
-    creationDate: new Date(),
-  },
-    {
-      name: 'dasdad',
-      description: 'lorem ipsum dolor sit amed',
-      image: 'https://www.rd.com/wp-content/uploads/2021/01/GettyImages-1175550351.jpg',
-      breed: 'siamese',
-      creationDate: new Date(),
-    }];
+  
+  posts: CatPost[] = [];
 
   constructor() { }
 
@@ -34,13 +23,14 @@ export class HomeComponent implements OnInit {
 
   fetchPosts() {
     axios.get(Endpoints.POSTS).then(res => {
+      console.log(res);
       this.posts = res.data;
     }).catch(err => {
 
     }).finally(() => {
 
     });
-  }
+  } 
 
   onFormSubmit(event: Event, form: HTMLFormElement) {
     event.preventDefault();
@@ -58,5 +48,7 @@ export class HomeComponent implements OnInit {
         this.loading = false;
       });
   }
-
+  goTo(itemId: string){
+    return "location.href='post.html/{{itemId}}'";
+  }
 }

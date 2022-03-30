@@ -5,4 +5,5 @@ export interface CatPost {
   breed: string,
 
   creationDate: Date,
+  id: string,
 }

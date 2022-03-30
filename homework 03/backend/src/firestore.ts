@@ -16,12 +16,13 @@ export class FirestoreService {
     }
 
     static async readAllFromCollection(collection: string) {
-        const snapshot = await firestore.collection(`posts`).get();
+        const snapshot = await firestore.collection(collection).get();
 
         const list: any[] = [];
-
+        
         snapshot.forEach((doc) => {
             list.push(doc.data());
+            list[list.length-1].id = doc.id;
         })
 
         return list;
