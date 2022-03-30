@@ -12,10 +12,10 @@ import { Router } from '@angular/router';
 
 export class HomeComponent implements OnInit {
   loading = false;
-  
+
   posts: CatPost[] = [];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.fetchPosts();
@@ -23,14 +23,13 @@ export class HomeComponent implements OnInit {
 
   fetchPosts() {
     axios.get(Endpoints.POSTS).then(res => {
-      console.log(res);
       this.posts = res.data;
     }).catch(err => {
 
     }).finally(() => {
 
     });
-  } 
+  }
 
   onFormSubmit(event: Event, form: HTMLFormElement) {
     event.preventDefault();
@@ -48,7 +47,11 @@ export class HomeComponent implements OnInit {
         this.loading = false;
       });
   }
-  goTo(itemId: string){
-    return "location.href='post.html/{{itemId}}'";
+
+  goTo(item: CatPost){
+    this.router.navigate(['/post'], {
+      queryParams: {id: item.id}
+    })
   }
+
 }
