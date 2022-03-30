@@ -54,4 +54,16 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  getDate(seconds: any){
+    var t = new Date(1970, 0, 1); // Epoch
+    t.setSeconds(seconds._seconds);
+    return t;
+  }
+
+  editPost(item: CatPost){
+    this.router.navigate(['/edit'], {
+      queryParams: {id: item.id}
+    })
+  }
+
 }

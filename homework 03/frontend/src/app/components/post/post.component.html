@@ -1,8 +1,31 @@
 <div class="page-container">
   <div class="page-content">
 
-    <div class="box">
-      dlasjdlsadj
+    <div class="posts-component">
+
+      <div class="card" >
+        <div class="card-image">
+          <figure class="image">
+            <img src="{{post.image}}" alt="Placeholder image">
+          </figure>
+        </div>
+        <div class="card-content">
+          <div class="media">
+            <div class="media-content">
+              <p class="title is-4">{{post.name}}</p>
+              <p class="subtitle is-6">@{{post.breed}}</p>
+            </div>
+          </div>
+
+          <div class="content">
+            {{post.description}}
+            <br>
+            <time datetime="2016-1-1">{{post.creationDate}}</time>
+          </div>
+          <button class="button is-danger is-outlined" (click)="deletePost()">Delete Post</button>
+        </div>
+      </div>
+
     </div>
 
   </div>

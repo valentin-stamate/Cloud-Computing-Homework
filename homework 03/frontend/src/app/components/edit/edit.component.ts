@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import axios from "axios";
 import {Endpoints} from "../../service/endpoints";
-import {CatPost} from "../../service/models";
 import { Router } from '@angular/router';
 @Component({
-  selector: 'app-post',
-  templateUrl: './post.component.html',
-  styleUrls: ['./post.component.scss']
+  selector: 'app-edit',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.scss']
 })
-export class PostComponent implements OnInit {
+export class EditComponent implements OnInit {
+  loading = false;
   postId: string = '';
   post: any ;
   constructor(private route: ActivatedRoute, private router: Router) { };
@@ -28,11 +28,19 @@ export class PostComponent implements OnInit {
   
       });
   }
-  deletePost(){
-    axios.delete(Endpoints.DELETE+this.postId).then(res => {}).catch(err => {
+  onFormUpdate(event: Event, form: HTMLFormElement) {
+    event.preventDefault();
 
-    }).finally(() => {
-      this.router.navigate(['/home'], {});
-    });
+    const formData = new FormData(form);
+
+    this.loading = true;
+    axios.put(Endpoints.PUT+this.postId, formData)
+      .then(res => {
+
+      }).catch(err => {
+
+      }).finally(() => {
+        this.router.navigate(['/home'], {});
+      });
   }
 }

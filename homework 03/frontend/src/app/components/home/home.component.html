@@ -66,9 +66,12 @@
           <div class="content">
             {{item.description}}
             <br>
-            <time datetime="2016-1-1">{{item.creationDate}}</time>
+            <time datetime="2016-1-1" value="">{{getDate(item.creationDate)}}</time>
           </div>
-         <button class="button is-link is-outlined" (click)="goTo(item)">See More Info</button>
+         <div class="buttons">
+            <button class="button is-success is-outlined" (click)="editPost(item)">Edit Post</button>
+            <button class="button is-link is-outlined" (click)="goTo(item)">See More Info</button>
+          </div>
         </div>
       </div>
 
