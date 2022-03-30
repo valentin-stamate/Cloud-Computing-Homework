@@ -4,6 +4,7 @@ import axios from "axios";
 import {Endpoints} from "../../service/endpoints";
 import {CatPost} from "../../service/models";
 import { Router } from '@angular/router';
+import {UtilService} from "../../service/util.service";
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
@@ -11,7 +12,8 @@ import { Router } from '@angular/router';
 })
 export class PostComponent implements OnInit {
   postId: string = '';
-  post: any ;
+  post: CatPost = new CatPost();
+
   constructor(private route: ActivatedRoute, private router: Router) { };
   ngOnInit(): void {
     this.route.queryParams
@@ -21,11 +23,10 @@ export class PostComponent implements OnInit {
 
       axios.get(Endpoints.POST+this.postId).then(res => {
         this.post = res.data;
-        console.log(this.post);
       }).catch(err => {
-  
+
       }).finally(() => {
-  
+
       });
   }
   deletePost(){
@@ -35,4 +36,9 @@ export class PostComponent implements OnInit {
       this.router.navigate(['/home'], {});
     });
   }
+
+  getDate(seconds: any){
+    return UtilService.getDate(seconds);
+  }
+
 }

@@ -3,6 +3,7 @@ import {CatPost} from "../../service/models";
 import axios from "axios";
 import {Endpoints} from "../../service/endpoints";
 import { Router } from '@angular/router';
+import {UtilService} from "../../service/util.service";
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -55,9 +56,7 @@ export class HomeComponent implements OnInit {
   }
 
   getDate(seconds: any){
-    var t = new Date(1970, 0, 1); // Epoch
-    t.setSeconds(seconds._seconds);
-    return t;
+    return UtilService.getDate(seconds);
   }
 
   editPost(item: CatPost){

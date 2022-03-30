@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import axios from "axios";
 import {Endpoints} from "../../service/endpoints";
 import { Router } from '@angular/router';
+import {CatPost} from "../../service/models";
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -11,8 +12,10 @@ import { Router } from '@angular/router';
 export class EditComponent implements OnInit {
   loading = false;
   postId: string = '';
-  post: any ;
+  post: CatPost = new CatPost();
+
   constructor(private route: ActivatedRoute, private router: Router) { };
+
   ngOnInit(): void {
     this.route.queryParams
       .subscribe((params: any) => {
@@ -21,11 +24,10 @@ export class EditComponent implements OnInit {
 
       axios.get(Endpoints.POST+this.postId).then(res => {
         this.post = res.data;
-        console.log(this.post);
       }).catch(err => {
-  
+
       }).finally(() => {
-  
+
       });
   }
   onFormUpdate(event: Event, form: HTMLFormElement) {

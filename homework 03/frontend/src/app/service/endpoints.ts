@@ -1,4 +1,4 @@
-const host = 'http://localhost:5050';
+const host = 'https://h3-backend-ylmmpdd4za-lz.a.run.app';
 
 export class Endpoints {
   static POSTS = `${host}/posts`;

@@ -20,7 +20,7 @@
           <div class="content">
             {{post.description}}
             <br>
-            <time datetime="2016-1-1">{{post.creationDate}}</time>
+            <time datetime="2016-1-1">{{getDate(post.creationDate)}}</time>
           </div>
           <button class="button is-danger is-outlined" (click)="deletePost()">Delete Post</button>
         </div>
