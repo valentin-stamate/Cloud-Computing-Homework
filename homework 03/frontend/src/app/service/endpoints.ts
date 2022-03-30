@@ -5,6 +5,9 @@ export class Endpoints {
   static POST = `${host}/posts/`;
   static PUT = `${host}/posts/`;
   static DELETE = `${host}/posts/`;
+
   static TRANSLATE = `${host}/translate`;
   static TAGS = `${host}/tag`;
+
+  static SHUFFLE = 'https://europe-central2-cloud-computing-345016.cloudfunctions.net/shuffle';
 }

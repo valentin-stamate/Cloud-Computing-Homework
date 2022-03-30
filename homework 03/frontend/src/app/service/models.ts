@@ -6,4 +6,6 @@ export class CatPost {
 
   creationDate: Date = new Date();
   id: string = '';
+
+  tags: string[] = [];
 }

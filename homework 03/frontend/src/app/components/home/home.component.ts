@@ -46,6 +46,8 @@ export class HomeComponent implements OnInit {
       }).finally(() => {
         this.fetchPosts();
         this.loading = false;
+
+        window.location.href = '/home';
       });
   }
 
@@ -63,6 +65,49 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/edit'], {
       queryParams: {id: item.id}
     })
+  }
+
+  getTags(item: CatPost) {
+    axios.get(`${Endpoints.TAGS}/${item.id}`)
+      .then(res => {
+        const taggedPost = res.data;
+        item.tags = taggedPost.tags;
+      }).catch(err => {
+
+      }).finally(() => {
+
+      });
+
+  }
+
+  translate(item: CatPost) {
+    axios.get(`${Endpoints.TRANSLATE}/${item.id}?lang=${'ro'}`)
+      .then(res => {
+        const translatedPost = res.data as CatPost;
+
+        item.name = translatedPost.name;
+        item.description = translatedPost.description;
+        item.breed = translatedPost.breed;
+
+      }).catch(err => {
+
+    }).finally(() => {
+
+    });
+  }
+
+  onShuffle() {
+    const posts = this.posts;
+
+    axios.post(Endpoints.SHUFFLE, posts)
+      .then(res => {
+        this.posts = res.data;
+      }).catch(err => {
+
+      }).finally(() => {
+
+      });
+
   }
 
 }

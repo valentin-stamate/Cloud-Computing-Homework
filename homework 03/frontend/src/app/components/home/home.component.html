@@ -47,6 +47,10 @@
 
     </form>
 
+    <div>
+      <button class="button is-info" (click)="onShuffle()">Randomize</button>
+    </div>
+
     <div class="posts-component">
 
       <div class="card" *ngFor="let item of posts">
@@ -68,9 +72,18 @@
             <br>
             <time datetime="2016-1-1">{{getDate(item.creationDate)}}</time>
           </div>
-         <div class="buttons">
+
+          <div class="mb-3">
+            <button class="button is-info is-outlined" (click)="getTags(item)">Get tags</button>
+            <div *ngIf="item.tags !== undefined">
+              {{item.tags.join(', ')}}
+            </div>
+          </div>
+
+          <div class="buttons">
             <button class="button is-success is-outlined" (click)="editPost(item)">Edit Post</button>
             <button class="button is-link is-outlined" (click)="goTo(item)">See More Info</button>
+            <button class="button is-info is-outlined" (click)="translate(item)">Translate</button>
           </div>
         </div>
       </div>
