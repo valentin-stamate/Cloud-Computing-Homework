@@ -6,6 +6,8 @@
     "start": "npx nodemon src/server.ts"
   },
   "dependencies": {
+    "@azure/cosmos": "^3.15.1",
+    "dotenv": "^16.0.0",
     "express": "^4.17.3"
   },
   "devDependencies": {
