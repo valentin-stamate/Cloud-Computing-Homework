@@ -14,14 +14,14 @@ const client = new CosmosClient({
 });
 
 let db: Database = {} as Database;
-let cont: Container = {} as Container;
+export let recipeContainer: Container = {} as Container;
 
 export async function main() {
     const {database} = await client.databases.createIfNotExists({id: databaseId});
     const {container} = await database.containers.createIfNotExists({id: containerId});
 
     db = database;
-    cont = container;
+    recipeContainer = container;
 
     console.log('Successfully connected with Azure Cosmos DB');
 }

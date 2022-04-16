@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "bf5003ad-a0f4-4188-a521-b0ee5d90fea2",
+		"name": "CC Homework 04",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Recipes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/recipes",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"recipes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recipes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Valentin/Desktop/ciorba-radauteana.jpg"
+						},
+						{
+							"key": "name",
+							"value": "Ciorba Radauteana",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Cea mai buna ciorba de la Decebal incoace",
+							"type": "text"
+						},
+						{
+							"key": "items",
+							"value": "[{\"name\": \"apa\", \"quantity\": 500}]",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/api/recipes",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"recipes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recipes",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Valentin/Desktop/ciorba-radauteana.jpg",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "Ciorba Radauteana",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "description",
+							"value": "Cea mai buna ciorba de la Decebal incoace..",
+							"type": "text"
+						},
+						{
+							"key": "items",
+							"value": "[{\"name\": \"apa\", \"quantity\": 900}]",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/api/recipes/db28ba8d-e8da-4abe-aca3-de8c9f40266a",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"recipes",
+						"db28ba8d-e8da-4abe-aca3-de8c9f40266a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recipes",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{host}}/api/recipes/7e6ebfeb-12ab-4811-9747-b923ff7fa18c",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"recipes",
+						"7e6ebfeb-12ab-4811-9747-b923ff7fa18c"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
