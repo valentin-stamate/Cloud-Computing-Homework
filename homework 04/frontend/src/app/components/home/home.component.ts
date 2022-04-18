@@ -5,6 +5,7 @@ import {Endpoints} from "../../service/endpoints";
 import { Router } from '@angular/router';
 import {UtilService} from "../../service/util.service";
 import { Buffer } from "buffer";
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -24,25 +25,24 @@ export class HomeComponent implements OnInit {
     this.fetchPosts();
   }
 
-  getSrcs(){
-    for(let index = 0; index < this.posts.length; index++){
-      this.posts[index].src = "data:image/png;base64," + this.toBase64(this.posts[index].imageBuffer);
-      console.log(this.posts[index].src);
-    }
-  }
-
   fetchPosts() {
-    console.log("HEREE");
+
     axios.get(Endpoints.POSTS).then(res => {
-      this.posts = res.data;
-      this.getSrcs();
+      this.posts = res.data.map((item: RecipesPost) => {
+        return {
+          ...item,
+          imageBuffer: new Buffer(item.imageBuffer)
+        }
+      });
+      /* Now the image buffer is of type Uint8Array */
+
     }).catch(err => {
 
     }).finally(() => {
 
     });
   }
-  
+
  toBase64(arr: Buffer) {
     //arr = new Uint8Array(arr) if it's an ArrayBuffer
     return btoa(
