@@ -1,0 +1,45 @@
+<div class="page-container">
+  <div class="page-content">
+
+    <div>
+      <button class="button is-info">Randomize</button>
+    </div>
+
+    <div class="posts-component" *ngFor="let item of posts">
+      <div class="card" >
+        <div class="card-image">
+          <figure >
+            <img src="{{item.src}}" alt="Placeholder image" class="image">
+          </figure>
+        </div>
+        <div class="card-content">
+          <div class="media">
+            <div class="media-content">
+              <p class="title is-4">{{item.name}}</p>
+            </div>
+          </div>
+
+          <div class="content">
+            {{item.description}}
+          </div>
+          <!--
+          <div class="mb-3">
+            <button class="button is-info is-outlined" (click)="getTags(item)">Get tags</button>
+            <div *ngIf="item.tags !== undefined">
+              {{item.tags.join(', ')}}
+            </div>
+          </div>
+          -->
+           <!--(click)="editPost(item)"-->
+          <div class="buttons">
+            <button class="button is-success is-outlined">See recepeit</button>
+            <button class="button is-success is-outlined">Edit Post</button>
+            <button class="button is-info is-outlined" >Translate</button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+</div>

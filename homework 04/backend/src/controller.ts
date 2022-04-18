@@ -8,7 +8,6 @@ import {UploadedFile} from "express-fileupload";
 export class Controller {
 
     static async getRecipes(req: Request<any>, res: Response) {
-
         const { resources: itemDefList } = await recipeContainer.items.readAll().fetchAll();
 
         res.contentType(ContentType.JSON);

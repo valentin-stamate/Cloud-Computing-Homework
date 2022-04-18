@@ -6,7 +6,7 @@ import cors from 'cors';
 import fileUpload from "express-fileupload";
 
 const app = express();
-const port = 8080;
+const port = 8090;
 const host = `http://localhost:${port}`;
 
 main().catch(err => {
