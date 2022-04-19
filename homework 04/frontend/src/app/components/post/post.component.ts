@@ -4,7 +4,7 @@ import axios from "axios";
 import {Endpoints} from "../../service/endpoints";
 import {RecipesPost} from "../../service/models";
 import { Router } from '@angular/router';
-import {UtilService} from "../../service/util.service";
+import { Buffer } from "buffer";
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
@@ -12,47 +12,30 @@ import {UtilService} from "../../service/util.service";
 })
 export class PostComponent implements OnInit {
   postId: string = '';
-  post: RecipesPost[] = [];
+  post = {} as RecipesPost;
 
   constructor(private route: ActivatedRoute, private router: Router) { };
+
   ngOnInit(): void {
     this.route.queryParams
       .subscribe((params: any) => {
-        this.postId = params.id;
+        this.post= JSON.parse(params.item);
       })
-
-      axios.get(Endpoints.POST+this.postId).then(res => {
-        this.post = res.data;
-      }).catch(err => {
-
-      }).finally(() => {
-
-      });
+    this.post.imageBuffer = new Buffer(this.post.imageBuffer);
   }
+  
+ toBase64(arr: Buffer) {
+  //arr = new Uint8Array(arr) if it's an ArrayBuffer
+    return btoa(
+      arr.reduce((data:any, byte:any) => data + String.fromCharCode(byte), '')
+    );
+  }
+
   deletePost(){
-    axios.delete(Endpoints.DELETE+this.postId).then(res => {}).catch(err => {
+    axios.delete(Endpoints.DELETE+this.post.id).then(res => {}).catch(err => {
 
     }).finally(() => {
       this.router.navigate(['/home'], {});
     });
   }
-
-  onFormSubmit(event: Event, form: HTMLFormElement) {
-    event.preventDefault();
-
-    const formData = new FormData(form);
-    axios.post(Endpoints.POSTS, formData)
-      .then(res => {
-
-      }).catch(err => {
-
-      }).finally(() => {
-        window.location.href = '/home';
-      });
-  }
-
-  getDate(seconds: any){
-    return UtilService.getDate(seconds);
-  }
-
 }

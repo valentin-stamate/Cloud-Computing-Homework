@@ -1,51 +1,47 @@
 <div class="page-container">
   <div class="page-content">
 
-    <form class="box" enctype="multipart/form-data" (submit)="onFormSubmit($event, form)" #form>
+    <div class="posts-component">
 
-      <div class="field">
-        <label class="label">Name</label>
-        <div class="control has-icons-left">
-          <input class="input" type="text" name="name" placeholder="The name of the post">
-          <span class="icon is-small is-left"><i class="fa-solid fa-file-signature"></i></span>
+      <div class="card" >
+        <div class="card-image">
+          <figure class="image">
+            <img src="data:image/png;base64,{{toBase64(post.imageBuffer)}}" alt="Placeholder image">
+          </figure>
+        </div>
+        <div class="card-content">
+          <div class="media">
+            <div class="media-content">
+              <p class="title is-4">{{post.name}}</p>
+            </div>
+          </div>
+
+          <div class="content">
+            {{post.description}}
+            <br>
+            <div class="field" name="items">
+              <label class="label">Ingredients:</label>
+              <div class="ingredients" *ngFor="let items of post.items">
+                  <div class="ingredient">
+                      <div class="control has-icons-left">
+                          <input readonly class="input" type="text" name="name" value="{{items.name}}">
+                          <span class="icon is-small is-left"><i class="fa-solid fa-receipt"></i></span>
+                      </div>
+                  </div>
+                  <div class="ingredient">
+                      <div class="control has-icons-left">
+                          <input readonly class="input" type="text" name="quantity" value="{{items.quantity}}">
+                          <span class="icon is-small is-left"><i class="fa-solid fa-align-justify"></i></span>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <button class="button is-danger is-outlined" (click)="deletePost()">Delete Post</button>
         </div>
       </div>
 
-      <div class="field">
-        <label class="label">Breed</label>
-        <div class="control has-icons-left">
-          <input class="input" type="text" name="breed" placeholder="The breed of the cat">
-          <span class="icon is-small is-left"><i class="fa-solid fa-cat"></i></span>
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Description</label>
-        <div class="control">
-          <textarea class="textarea" name="description"></textarea>
-        </div>
-      </div>
-
-      <div class="field is-grouped">
-        <div class="control file">
-          <label class="file-label">
-            <input class="file-input" type="file" name="image" accept=".png, .jpg">
-            <span class="file-cta">
-                <span class="file-icon">
-                  <i class="fas fa-upload"></i>
-                </span>
-                <span class="file-label">
-                  Upload image...
-                </span>
-              </span>
-          </label>
-        </div>
-        <div class="control">
-          <button class="button is-link">Submit</button>
-        </div>
-      </div>
-
-    </form>
+    </div>
 
   </div>
 </div>

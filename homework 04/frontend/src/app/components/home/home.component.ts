@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
 
   goTo(item: RecipesPost){
     this.router.navigate(['/post'], {
-      queryParams: {id: item.id}
+      queryParams: {item:JSON.stringify(item)}
     })
   }
 
@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
 
   editPost(item: RecipesPost){
     this.router.navigate(['/edit'], {
-      queryParams: {id: item.id}
+      queryParams: {item:JSON.stringify(item)}
     })
   }
 

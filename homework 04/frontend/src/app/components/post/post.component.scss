@@ -1,0 +1,32 @@
+.page-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  
+  .page-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    width: min(740px, 100%);
+  }
+  
+  .posts-component {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .ingredients{
+      gap: 10px;
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+  }
+
+  .ingredient{
+    padding: 10px 0 10px 0;
+    width: 50%;
+}

@@ -7,6 +7,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { PostComponent } from './components/post/post.component';
 import { EditComponent } from './components/edit/edit.component';
+import { CreateComponent } from './components/create/create.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,9 +16,11 @@ import { EditComponent } from './components/edit/edit.component';
     NavbarComponent,
     HomeComponent,
     PostComponent,
-    EditComponent
+    EditComponent,
+    CreateComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule
   ],

@@ -15,4 +15,8 @@ export class NavbarComponent implements OnInit {
   goHome(){
     this.router.navigate(['/home'], {})
   }
+
+  createRecipe(){
+    this.router.navigate(['/create'], {})
+  }
 }
