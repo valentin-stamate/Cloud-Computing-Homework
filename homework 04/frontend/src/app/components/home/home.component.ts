@@ -28,27 +28,13 @@ export class HomeComponent implements OnInit {
   fetchPosts() {
 
     axios.get(Endpoints.POSTS).then(res => {
-      this.posts = res.data.map((item: RecipesPost) => {
-        return {
-          ...item,
-          imageBuffer: new Buffer(item.imageBuffer)
-        }
-      });
-      /* Now the image buffer is of type Uint8Array */
-
+      this.posts = res.data;
     }).catch(err => {
 
     }).finally(() => {
 
     });
   }
-
- toBase64(arr: Buffer) {
-    //arr = new Uint8Array(arr) if it's an ArrayBuffer
-    return btoa(
-       arr.reduce((data:any, byte:any) => data + String.fromCharCode(byte), '')
-    );
- }
 
   goTo(item: RecipesPost){
     this.router.navigate(['/post'], {

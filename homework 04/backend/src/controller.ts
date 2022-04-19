@@ -4,6 +4,8 @@ import {ContentType} from "./content.type";
 import {ResponseMessage, StatusCode} from "./rest.utils";
 import {Recipe} from "./models";
 import {UploadedFile} from "express-fileupload";
+import {UtilService} from "./util.service";
+import {StoreService} from "./storage.service";
 
 export class Controller {
 
@@ -16,36 +18,46 @@ export class Controller {
 
     static async createRecipe(req: Request<any>, res: Response) {
         console.log(req.body);
-        // if (!req.files) {
-        //     res.statusCode = StatusCode.BAD_REQUEST;
-        //     res.end(ResponseMessage.COMPLETE_ALL_FIELDS);
-        //     return;
-        // }
+        if (!req.files) {
+            res.statusCode = StatusCode.BAD_REQUEST;
+            res.end(ResponseMessage.COMPLETE_ALL_FIELDS);
+            return;
+        }
 
-        // const file = req.files.file as UploadedFile;
-        // const body = req.body;
+        const image = req.files.file as UploadedFile;
+        const body = req.body;
 
-        // if (!body.name || !body.description || !body.items) {
-        //     res.statusCode = StatusCode.BAD_REQUEST;
-        //     res.end(ResponseMessage.COMPLETE_ALL_FIELDS);
-        //     return;
-        // }
+        if (!body.name || !body.description || !body.items || !image) {
+            res.statusCode = StatusCode.BAD_REQUEST;
+            res.end(ResponseMessage.COMPLETE_ALL_FIELDS);
+            return;
+        }
 
-        // body.items = JSON.parse(body.items);
+        body.items = JSON.parse(body.items);
 
-        // const recipe: Recipe = {
-        //     name: body.name,
-        //     description: body.description,
-        //     items: body.items,
-        //     imageBuffer: file.data,
-        //     /* TODO: Using Vision Api, fill the tags field */
-        //     tags: [],
-        // };
+        const split = image.name.split('.');
 
-        // await recipeContainer.items.create(recipe);
+        let extension = '';
+        if (split.length !== 0) {
+            extension = split[split.length - 1];
+        }
 
-        // res.statusCode = StatusCode.CREATED;
-        // res.end();
+        const filename = `${UtilService.generateRandomString(16)}.${extension}`;
+        const fileUrl = await StoreService.uploadFile(image.data, filename) as string;
+
+        const recipe: Recipe = {
+            name: body.name,
+            description: body.description,
+            items: body.items,
+            imageUrl: fileUrl,
+            /* TODO: Using Vision Api, fill the tags field */
+            tags: [],
+        };
+
+        await recipeContainer.items.create(recipe);
+
+        res.statusCode = StatusCode.CREATED;
+        res.end();
     }
 
     static async deleteRecipe(req: Request<any>, res: Response) {
@@ -65,7 +77,7 @@ export class Controller {
             return;
         }
 
-        //await item.delete();
+        await item.delete();
         res.statusCode = StatusCode.OK;
         res.end();
     }
@@ -75,58 +87,69 @@ export class Controller {
         const files = req.files;
         const body = req.body;
         console.log(body);
-        // if (!id) {
-        //     res.statusCode = StatusCode.BAD_REQUEST;
-        //     res.end(ResponseMessage.MISSING_ID);
-        //     return;
-        // }
+        if (!id) {
+            res.statusCode = StatusCode.BAD_REQUEST;
+            res.end(ResponseMessage.MISSING_ID);
+            return;
+        }
 
-        // const item = await recipeContainer.item(id, id);
+        const item = await recipeContainer.item(id, id);
 
-        // if (!item) {
-        //     res.statusCode = StatusCode.NOT_FOUND;
-        //     res.end();
-        //     return;
-        // }
+        if (!item) {
+            res.statusCode = StatusCode.NOT_FOUND;
+            res.end();
+            return;
+        }
 
-        // if (body.items) {
-        //     body.items = JSON.parse(body.items);
-        // }
+        if (body.items) {
+            body.items = JSON.parse(body.items);
+        }
 
-        // if (files && files.file) {
-        //     const file = files.file as UploadedFile;
-        //     body.imageBuffer = file.data;
-        //     /* TODO: Using Vision Api, fill the tags field */
-        //     body.tags = [];
-        // }
+        if (files && files.file) {
+            const image = files.file as UploadedFile;
+            const split = image.name.split('.');
 
-        // /* The actual data */
-        // const oldData = (await item.read()).resource as Recipe;
+            let extension = '';
+            if (split.length !== 0) {
+                extension = split[split.length - 1];
+            }
 
-        // if (!oldData) {
-        //     res.statusCode = StatusCode.NOT_FOUND;
-        //     res.end();
-        //     return;
-        // }
+            const filename = `${UtilService.generateRandomString(16)}.${extension}`;
+            const fileUrl = await StoreService.uploadFile(image.data, filename) as string;
 
-        // const updatedData = body;
+            body.imageUrl = fileUrl;
 
-        // console.log(updatedData);
-        // console.log(oldData);
+            /* TODO: Using Vision Api, fill the tags field */
+            body.tags = [];
+        }
 
-        // const newData: Recipe = {
-        //     id: updatedData.id || oldData.id,
-        //     name: updatedData.name || oldData.name,
-        //     description: updatedData.description || oldData.description,
-        //     items: updatedData.items || oldData.items,
-        //     imageBuffer: updatedData.imageBuffer || oldData.imageBuffer,
-        //     tags: updatedData.tags || oldData.tags,
-        // };
+        /* The actual data */
+        const oldData = (await item.read()).resource as Recipe;
 
-        // await item.replace(newData);
+        if (!oldData) {
+            res.statusCode = StatusCode.NOT_FOUND;
+            res.end();
+            return;
+        }
 
-        // res.statusCode = StatusCode.OK;
-        // res.end();
+        const updatedData = body;
+
+        console.log(updatedData);
+        console.log(oldData);
+
+        const newData: Recipe = {
+            id: updatedData.id || oldData.id,
+            name: updatedData.name || oldData.name,
+            description: updatedData.description || oldData.description,
+            items: updatedData.items || oldData.items,
+            imageUrl: updatedData.imageUrl || oldData.imageUrl,
+            tags: updatedData.tags || oldData.tags,
+        };
+
+        await item.replace(newData);
+
+        res.statusCode = StatusCode.OK;
+        res.end();
     }
 
 }

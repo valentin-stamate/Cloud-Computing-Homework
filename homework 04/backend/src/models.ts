@@ -8,7 +8,7 @@ export interface Recipe {
     name: string;
     description: string;
     items: RecipeItem[];
-    imageBuffer: Buffer;
+    imageUrl: string;
     tags: string[];
 }
 

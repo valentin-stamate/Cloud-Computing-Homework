@@ -13,27 +13,29 @@ import { Buffer } from "buffer";
 export class EditComponent implements OnInit {
   loading = false;
   postId: string = '';
-  post = {} as RecipesPost;
-  constructor(private route: ActivatedRoute, private router: Router) { };
+  post: RecipesPost;
+  constructor(private route: ActivatedRoute, private router: Router) {
+    this.post = {
+      name: '',
+      description: '',
+      imageUrl: '',
+      items: [],
+      tags: [],
+      src: '',
+    }
+  };
 
   ngOnInit(): void {
     this.route.queryParams
       .subscribe((params: any) => {
-        this.post= JSON.parse(params.item);
+        this.post = JSON.parse(params.item);
       })
-    this.post.imageBuffer = new Buffer(this.post.imageBuffer);
+
     console.log(this.post)
   }
 
   onAddIngredients(){
     this.post.items.push({} as RecipeItem);
-  }
-  
- toBase64(arr: Buffer) {
-  //arr = new Uint8Array(arr) if it's an ArrayBuffer
-    return btoa(
-      arr.reduce((data:any, byte:any) => data + String.fromCharCode(byte), '')
-    );
   }
 
   onFormUpdate(event: Event, form: HTMLFormElement) {

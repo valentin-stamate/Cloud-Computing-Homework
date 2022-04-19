@@ -4,7 +4,7 @@
         <form class="box" enctype="multipart/form-data" (submit)="onFormUpdate($event, form)" #form>
             <div class="card-image">
                 <figure class="image">
-                  <img src="data:image/png;base64,{{toBase64(post.imageBuffer)}}" alt="Placeholder image">
+                  <img src="{{post.imageUrl}}" alt="Placeholder image">
                 </figure>
             </div>
             <div class="field">
@@ -44,7 +44,7 @@
             <div class="field is-grouped">
               <div class="control file">
                 <label class="file-label">
-                  <input class="file-input" type="file" name="image" accept=".png, .jpg">
+                  <input class="file-input" type="file" name="file" accept=".png, .jpg">
                   <span class="file-cta">
                       <span class="file-icon">
                         <i class="fas fa-upload"></i>
