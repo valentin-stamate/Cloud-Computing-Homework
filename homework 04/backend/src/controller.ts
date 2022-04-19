@@ -6,6 +6,8 @@ import {Recipe} from "./models";
 import {UploadedFile} from "express-fileupload";
 import {UtilService} from "./util.service";
 import {StoreService} from "./storage.service";
+import { VisionService } from "./vision";
+import { TranslateService } from "./translator";
 
 export class Controller {
 
@@ -43,15 +45,15 @@ export class Controller {
         }
 
         const filename = `${UtilService.generateRandomString(16)}.${extension}`;
-        const fileUrl = await StoreService.uploadFile(image.data, filename) as string;
+        const fileUrl = await StoreService.uploadFileToBlob(image.data, filename) as string;
+        const imageTags = await VisionService.tagPicture(fileUrl);
 
         const recipe: Recipe = {
             name: body.name,
             description: body.description,
             items: body.items,
             imageUrl: fileUrl,
-            /* TODO: Using Vision Api, fill the tags field */
-            tags: [],
+            tags: imageTags,
         };
 
         await recipeContainer.items.create(recipe);
@@ -86,7 +88,7 @@ export class Controller {
         const id = req.params.id;
         const files = req.files;
         const body = req.body;
-        console.log(body);
+        console.log(id);
         if (!id) {
             res.statusCode = StatusCode.BAD_REQUEST;
             res.end(ResponseMessage.MISSING_ID);
@@ -115,15 +117,14 @@ export class Controller {
             }
 
             const filename = `${UtilService.generateRandomString(16)}.${extension}`;
-            const fileUrl = await StoreService.uploadFile(image.data, filename) as string;
+            const fileUrl = await StoreService.uploadFileToBlob(image.data, filename) as string;
 
             body.imageUrl = fileUrl;
 
-            /* TODO: Using Vision Api, fill the tags field */
-            body.tags = [];
+            const imageTags = await VisionService.tagPicture(fileUrl);
+            body.tags = imageTags;
         }
 
-        /* The actual data */
         const oldData = (await item.read()).resource as Recipe;
 
         if (!oldData) {
@@ -134,8 +135,8 @@ export class Controller {
 
         const updatedData = body;
 
-        console.log(updatedData);
-        console.log(oldData);
+        // console.log(updatedData);
+        // console.log(oldData);
 
         const newData: Recipe = {
             id: updatedData.id || oldData.id,
@@ -151,5 +152,17 @@ export class Controller {
         res.statusCode = StatusCode.OK;
         res.end();
     }
+    static async translateRecipe(req: Request<any>, res: Response) {
+        const id = req.params.id;
 
+        const item = recipeContainer.item(id, undefined);
+        //console.log("Read item '" + item.id + "'");
+        const readDoc = (await item.read()).resource as Recipe;
+        console.log("item with id '" + item.id + "' found");
+        //console.log(readDoc);
+        const recipe = await TranslateService.translatePost(readDoc)
+        res.statusCode = StatusCode.OK;
+        res.contentType(ContentType.JSON);
+        res.end(JSON.stringify(recipe));
+    }
 }

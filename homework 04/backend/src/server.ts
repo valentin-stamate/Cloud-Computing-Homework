@@ -22,6 +22,7 @@ app.get(Endpoints.RECIPES, Controller.getRecipes);
 app.post(Endpoints.RECIPES, Controller.createRecipe);
 app.patch(`${Endpoints.RECIPES}/:id`, Controller.updateRecipe);
 app.delete(`${Endpoints.RECIPES}/:id`, Controller.deleteRecipe);
+app.get(`${Endpoints.TRANSLATE}/:id`, Controller.translateRecipe);
 
 app.listen(port, () => {
     console.log(`Server started at ${host}`);
