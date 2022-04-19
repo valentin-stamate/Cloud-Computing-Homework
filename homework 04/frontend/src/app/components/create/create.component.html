@@ -1,6 +1,6 @@
 <div class="page-container">
     <div class="page-content">
-  
+
         <form class="box" enctype="multipart/form-data" (submit)="onFormSubmit($event, form)" #form>
 
             <div class="field">
@@ -18,18 +18,18 @@
                 </div>
             </div>
 
-            <div class="field" name="items">
+            <div class="field">
                 <label class="label">Ingredients</label>
-                <div class="ingredients" *ngFor="let item of arrayOfingredients">
+                <div class="ingredients" *ngFor="let item of arrayOfingredients; let i = index">
                     <div class="ingredient">
                         <div class="control has-icons-left">
-                            <input class="input" type="text" [(ngModel)]="item.name" value="{{item.name}}" placeholder="Name">
+                            <input class="input" type="text" name="itemName_{{i}}" [(ngModel)]="item.name" value="{{item.name}}" placeholder="Name">
                             <span class="icon is-small is-left"><i class="fa-solid fa-receipt"></i></span>
                         </div>
                     </div>
                     <div class="ingredient">
                         <div class="control has-icons-left">
-                            <input class="input" type="text" [(ngModel)]="item.quantity" value="{{item.quantity}}" placeholder="Quantity">
+                            <input class="input" type="number" name="itemQuantity_{{i}}" [(ngModel)]="item.quantity" value="{{item.quantity}}" placeholder="Quantity">
                             <span class="icon is-small is-left"><i class="fa-solid fa-align-justify"></i></span>
                         </div>
                     </div>
