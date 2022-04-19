@@ -4,7 +4,6 @@ import axios from "axios";
 import {Endpoints} from "../../service/endpoints";
 import { Router } from '@angular/router';
 import {RecipesPost, RecipeItem} from "../../service/models";
-import { Buffer } from "buffer";
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -42,7 +41,7 @@ export class EditComponent implements OnInit {
     event.preventDefault();
 
     const formData = new FormData(form);
-
+    formData.append("items", JSON.stringify(this.post.items));
     this.loading = true;
     axios.patch(Endpoints.PUT+this.post.id, formData)
       .then(res => {

@@ -25,8 +25,8 @@ export class CreateComponent implements OnInit {
     const formData = new FormData(form);
     formData.append("items", JSON.stringify(this.arrayOfingredients));
 
-    // const formObject = Object.fromEntries(formData);
-
+    //const formObject = Object.fromEntries(formData);
+    //console.log(Object.fromEntries(formData));
     axios.post(Endpoints.POSTS, formData)
       .then(res => {
 
