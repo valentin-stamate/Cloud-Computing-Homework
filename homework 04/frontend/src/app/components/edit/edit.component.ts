@@ -22,7 +22,6 @@ export class EditComponent implements OnInit {
         this.post= JSON.parse(params.item);
       })
     this.post.imageBuffer = new Buffer(this.post.imageBuffer);
-    console.log(this.post)
   }
 
   onAddIngredients(){
@@ -40,7 +39,7 @@ export class EditComponent implements OnInit {
     event.preventDefault();
 
     const formData = new FormData(form);
-
+    formData.append("items", JSON.stringify(this.post.items));
     this.loading = true;
     axios.patch(Endpoints.PUT+this.post.id, formData)
       .then(res => {
