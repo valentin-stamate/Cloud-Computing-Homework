@@ -6,7 +6,10 @@
     "start": "npx nodemon src/server.ts"
   },
   "dependencies": {
+    "@azure/cognitiveservices-computervision": "^8.2.0",
     "@azure/cosmos": "^3.15.1",
+    "@azure/storage-blob": "^12.9.0",
+    "axios": "^0.26.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
