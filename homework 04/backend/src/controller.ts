@@ -155,12 +155,31 @@ export class Controller {
     static async translateRecipe(req: Request<any>, res: Response) {
         const id = req.params.id;
 
-        const item = recipeContainer.item(id, undefined);
-        //console.log("Read item '" + item.id + "'");
-        const readDoc = (await item.read()).resource as Recipe;
-        console.log("item with id '" + item.id + "' found");
-        //console.log(readDoc);
-        const recipe = await TranslateService.translatePost(readDoc)
+        if (!id) {
+            res.statusCode = StatusCode.BAD_REQUEST;
+            res.end(ResponseMessage.MISSING_ID);
+            return;
+        }
+
+        const item = await recipeContainer.item(id, id);
+
+        if (!item) {
+            res.statusCode = StatusCode.NOT_FOUND;
+            res.end();
+            return;
+        }
+
+        const itemData = (await item.read()).resource as Recipe;
+
+        if (!itemData) {
+            res.statusCode = StatusCode.NOT_FOUND;
+            res.end();
+            return;
+        }
+
+        console.log(itemData)
+
+        const recipe = await TranslateService.translatePost(itemData)
         res.statusCode = StatusCode.OK;
         res.contentType(ContentType.JSON);
         res.end(JSON.stringify(recipe));
