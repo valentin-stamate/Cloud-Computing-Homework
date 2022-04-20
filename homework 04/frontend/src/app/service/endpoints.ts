@@ -1,4 +1,4 @@
-const host = 'http://localhost:8090';
+const host = 'http://localhost:8080';
 
 export class Endpoints {
   static POSTS = `${host}/api/recipes`;

@@ -88,7 +88,7 @@
 						},
 						{
 							"key": "description",
-							"value": "Cea mai buna ciorba de la Decebal incoace..",
+							"value": "Cea mai buna ciorba de la Decebal incoace.....",
 							"type": "text"
 						},
 						{
@@ -99,14 +99,14 @@
 					]
 				},
 				"url": {
-					"raw": "{{host}}/api/recipes/db28ba8d-e8da-4abe-aca3-de8c9f40266a",
+					"raw": "{{host}}/api/recipes/dd39a881-ba18-4672-b205-113c46a0439f",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
 						"recipes",
-						"db28ba8d-e8da-4abe-aca3-de8c9f40266a"
+						"dd39a881-ba18-4672-b205-113c46a0439f"
 					]
 				}
 			},
@@ -122,14 +122,33 @@
 					"formdata": []
 				},
 				"url": {
-					"raw": "{{host}}/api/recipes/7e6ebfeb-12ab-4811-9747-b923ff7fa18c",
+					"raw": "{{host}}/api/recipes/dd39a881-ba18-4672-b205-113c46a0439f",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
 						"recipes",
-						"7e6ebfeb-12ab-4811-9747-b923ff7fa18c"
+						"dd39a881-ba18-4672-b205-113c46a0439f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Translate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/translate/dd39a881-ba18-4672-b205-113c46a0439f",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"translate",
+						"dd39a881-ba18-4672-b205-113c46a0439f"
 					]
 				}
 			},

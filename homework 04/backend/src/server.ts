@@ -6,14 +6,14 @@ import cors from 'cors';
 import fileUpload from "express-fileupload";
 
 const app = express();
-const port = 8090;
+const port = 8080;
 const host = `http://localhost:${port}`;
 
 main().catch(err => {
     console.error(err);
 });
 
-app.use(cors({origin: ['http://localhost:4200']}));
+app.use(cors({origin: '*'}));
 
 app.use(express.json());
 app.use(fileUpload());
