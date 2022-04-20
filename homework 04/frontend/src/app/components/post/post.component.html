@@ -37,7 +37,17 @@
               </div>
             </div>
           </div>
-          <button class="button is-danger is-outlined" (click)="deletePost()">Delete Post</button>
+          <div class="mb-3">
+            <label class="label">Tags:</label>
+            <div *ngIf="post.tags !== undefined">
+              {{post.tags.join(', ')}}
+            </div>
+          </div>
+          <div class="buttons">
+            <button class="button is-danger is-outlined" (click)="deletePost()">Delete Post</button>
+            <button class="button is-info is-outlined" (click)="translatePost(post)">Translate</button>
+          </div>
+          
         </div>
       </div>
 

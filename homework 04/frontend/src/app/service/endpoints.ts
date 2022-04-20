@@ -5,4 +5,5 @@ export class Endpoints {
   static POST = `${host}/api/recipes`;
   static PUT = `${host}/api/recipes/`;
   static DELETE = `${host}/api/recipes/`;
+  static TRANSLATE = `${host}/api/translate/`;
 }

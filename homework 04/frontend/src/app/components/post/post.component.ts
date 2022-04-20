@@ -38,4 +38,23 @@ export class PostComponent implements OnInit {
       this.router.navigate(['/home'], {});
     });
   }
+
+  translatePost(post: RecipesPost){
+    console.log("HEREEE");
+    axios.get(Endpoints.TRANSLATE+post.id)
+      .then(res => {
+        const translatedPost = res.data as RecipesPost;
+
+        post.name = translatedPost.name;
+        post.description = translatedPost.description;
+        post.items = translatedPost.items;
+        post.tags = translatedPost.tags;
+
+      }).catch(err => {
+
+    }).finally(() => {
+
+    });
+    
+  }
 }
