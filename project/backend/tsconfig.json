@@ -4,7 +4,9 @@
     "target": "es6",
     "sourceMap": false,
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "exclude": [
     "node_modules"
