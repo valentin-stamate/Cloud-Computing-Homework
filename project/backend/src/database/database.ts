@@ -1,5 +1,5 @@
 import {DataSource} from "typeorm";
-import {User} from "./models";
+import {FoodItem, Restaurant, User} from "./models";
 import "reflect-metadata"
 require('dotenv').config();
 
@@ -14,7 +14,7 @@ export const AppDataSource = new DataSource({
     database: env.DB_DATABASE,
     synchronize: true,
     logging: true,
-    entities: [User],
+    entities: [User, Restaurant, FoodItem],
     subscribers: [],
     migrations: [],
 });
