@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "04307292-190f-4665-a1a1-bb3de78ab5b4",
+		"name": "Cloud Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Visitor",
+			"item": [
+				{
+					"name": "User Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "ValentinSt",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "stamatevalentin125@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Login Code",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "ValentinSt",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "stamatevalentin125@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "tqS0GKZvGiTXSIaL",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/login-code",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"login-code"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "ValentinSt",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "stamatevalentin125@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/signup",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restaurant Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/login/restaurant",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"login",
+								"restaurant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restaurant Login Code",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/login-code/restaurant",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"login-code",
+								"restaurant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restaurant Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "profilePhoto",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "coverPhoto",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/signup/restaurant",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"signup",
+								"restaurant"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "user_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
