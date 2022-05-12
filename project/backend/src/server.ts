@@ -44,7 +44,9 @@ app.use(fileUpload());
 app.post(Endpoints.USER_LOGIN, Middleware.visitorMiddleware, AuthController.userLogin);
 app.post(Endpoints.USER_LOGIN_CODE, Middleware.visitorMiddleware, AuthController.userLoginWithCode);
 app.post(Endpoints.USER_SIGNUP, Middleware.visitorMiddleware, AuthController.userSignup);
+
 app.post(Endpoints.RESTAURANT_LOGIN, Middleware.visitorMiddleware, AuthController.restaurantLogin);
+app.post(Endpoints.RESTAURANT_LOGIN_CODE, Middleware.visitorMiddleware, AuthController.restaurantLoginWithCode);
 app.post(Endpoints.RESTAURANT_SIGNUP, Middleware.visitorMiddleware, AuthController.restaurantSignup);
 
 /************************************************************************************
