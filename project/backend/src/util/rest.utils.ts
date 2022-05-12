@@ -1,7 +1,13 @@
 export enum ResponseMessage {
     NO_AUTH_TOKEN = 'There is no authentication key available',
     INVALID_TOKEN = 'Invalid token',
-    USER_NOT_EXISTS = 'Valid token, but user doesn\'t exist',
+    USER_NOT_EXISTS = 'User doesn\'t exist',
+    RESTAURANT_NOT_EXISTS = 'Restaurant doesn\'t exist',
+    INVALID_FORM = 'Invalid form',
+    CREDENTIALS_ALREADY_TAKEN = 'Credentials already taken',
+    ERROR_SENDING_MAIL = 'Error sending mail',
+    INVALID_CODE = 'Invalid code',
+    MISSING_PHOTO = 'Missing photo',
 }
 
 export enum ContentType {

@@ -6,7 +6,7 @@ const env = process.env as any;
 
 export class JwtService {
 
-    static generateAccessTokenForStudent(user: User) {
+    static generateAccessTokenForUser(user: User) {
         return jwt.sign({
                 id: user.id,
                 name: user.name,

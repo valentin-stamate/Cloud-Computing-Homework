@@ -1,14 +1,23 @@
-import {Column, Entity, Index, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+
+@Entity()
+export class Code {
+    @PrimaryGeneratedColumn()
+    id: number = 0;
+
+    @Column({nullable: false, unique: true})
+    code: string = '';
+}
 
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
     id: number = 0;
 
-    @Column({nullable: false})
+    @Column({nullable: false, unique: true})
     name: string = '';
 
-    @Column({nullable: false})
+    @Column({nullable: false, unique: true})
     email: string = '';
 
     /* Cosul de cumparaturi */

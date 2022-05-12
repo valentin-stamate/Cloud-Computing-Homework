@@ -5,6 +5,8 @@ import fileUpload from "express-fileupload";
 import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
+import {Endpoints} from "./endpoints";
+import {AuthController} from "./controller/auth.controller";
 require('dotenv').config();
 
 const env = process.env;
@@ -24,8 +26,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 // Handle logs in console during development
+app.use(morgan('dev'));
 if (process.env.NODE_ENV === 'development') {
-    app.use(morgan('dev'));
     app.use(cors({origin: ['*']}));
 }
 
@@ -39,9 +41,11 @@ if (process.env.NODE_ENV === 'production') {
  ***********************************************************************************/
 app.use(fileUpload());
 
-app.get('/', (req, res) => {
-    res.end('Hello word!')
-});
+app.post(Endpoints.USER_LOGIN, Middleware.visitorMiddleware, AuthController.userLogin);
+app.post(Endpoints.USER_LOGIN_CODE, Middleware.visitorMiddleware, AuthController.userLoginWithCode);
+app.post(Endpoints.USER_SIGNUP, Middleware.visitorMiddleware, AuthController.userSignup);
+app.post(Endpoints.RESTAURANT_LOGIN, Middleware.visitorMiddleware, AuthController.restaurantLogin);
+app.post(Endpoints.RESTAURANT_SIGNUP, Middleware.visitorMiddleware, AuthController.restaurantSignup);
 
 /************************************************************************************
  *                               Express Error Handling

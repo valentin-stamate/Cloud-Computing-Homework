@@ -6,8 +6,12 @@ import {Restaurant, User} from "../database/models";
 export class Middleware {
     /** Middleware for unauthorized users. In this case every request can pass. */
     static async visitorMiddleware (req: Request<any>, res: Response, next: NextFunction) {
-        res.setHeader('Content-Type', ContentType.JSON);
-        next();
+        try {
+            res.setHeader('Content-Type', ContentType.JSON);
+            next();
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     /** Middleware for authorized students. In order for the request to pass the user should exist. */
@@ -36,7 +40,6 @@ export class Middleware {
             }
 
             res.setHeader('Content-Type', ContentType.JSON);
-            next();
         } catch (err) {
             console.log(err);
         }
