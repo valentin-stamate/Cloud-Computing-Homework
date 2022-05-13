@@ -94,6 +94,11 @@
 									"key": "email",
 									"value": "stamatevalentin125@gmail.com",
 									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Str. Rosiorilor Nr. 4",
+									"type": "text"
 								}
 							]
 						},
@@ -219,6 +224,38 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Make Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/order",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Restaurant",
+			"item": []
 		}
 	],
 	"event": [

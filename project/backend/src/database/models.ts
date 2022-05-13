@@ -20,6 +20,12 @@ export class User {
     @Column({nullable: false, unique: true})
     email: string = '';
 
+    @Column({nullable: false})
+    money: number = 0;
+
+    @Column({nullable: false})
+    address: string = '';
+
     /* Cosul de cumparaturi */
     @ManyToMany(() => FoodItem)
     @JoinTable()

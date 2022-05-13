@@ -107,7 +107,7 @@ export class AuthController {
     static async userSignup(req: Request<any>, res: Response, next: NextFunction) {
         const body = req.body as User;
 
-        if (!body.name || !body.email) {
+        if (!body.name || !body.email || !body.address) {
             res.statusCode = StatusCode.BAD_REQUEST;
             res.end(ResponseMessage.INVALID_FORM);
             return;
@@ -116,6 +116,7 @@ export class AuthController {
         const user = new User();
         user.name = body.name;
         user.email = body.email;
+        user.address = body.address;
 
         const userRepository = AppDataSource.getRepository(User);
         const existingUser = await userRepository.findOneBy([

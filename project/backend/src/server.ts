@@ -7,6 +7,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import {Endpoints} from "./endpoints";
 import {AuthController} from "./controller/auth.controller";
+import {UserController} from "./controller/user.controller";
 require('dotenv').config();
 
 const env = process.env;
@@ -48,6 +49,8 @@ app.post(Endpoints.USER_SIGNUP, Middleware.visitorMiddleware, AuthController.use
 app.post(Endpoints.RESTAURANT_LOGIN, Middleware.visitorMiddleware, AuthController.restaurantLogin);
 app.post(Endpoints.RESTAURANT_LOGIN_CODE, Middleware.visitorMiddleware, AuthController.restaurantLoginWithCode);
 app.post(Endpoints.RESTAURANT_SIGNUP, Middleware.visitorMiddleware, AuthController.restaurantSignup);
+
+app.post(Endpoints.ORDER, Middleware.userMiddleware, UserController.makeOrder);
 
 /************************************************************************************
  *                               Express Error Handling

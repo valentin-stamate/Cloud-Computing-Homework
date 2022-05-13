@@ -1,7 +1,8 @@
 import {NextFunction, Request, Response,} from "express";
 import {JwtService} from "../service/jwt.service";
-import {ContentType, ResponseMessage, StatusCode} from "../util/rest.utils";
+import {ContentType, Headers, ResponseMessage, StatusCode} from "../util/rest.utils";
 import {Restaurant, User} from "../database/models";
+import {AppDataSource} from "../database/database";
 
 export class Middleware {
     /** Middleware for unauthorized users. In this case every request can pass. */
@@ -11,13 +12,16 @@ export class Middleware {
             next();
         } catch (err) {
             console.log(err);
+
+            res.statusCode = StatusCode.INTERNAL_SERVER_ERROR;
+            res.end();
         }
     }
 
     /** Middleware for authorized students. In order for the request to pass the user should exist. */
     static async userMiddleware (req: Request<any>, res: Response, next: NextFunction) {
         try {
-            const token = req.get('Authorization');
+            const token = req.get(Headers.AUTHORIZATION);
 
             if (!token) {
                 next(new ResponseError(ResponseMessage.NO_AUTH_TOKEN, StatusCode.UNAUTHORIZED));
@@ -26,29 +30,38 @@ export class Middleware {
 
             const user = JwtService.verifyToken(token) as User;
 
-            if (user === null) {
+            if (!user) {
                 next(new ResponseError(ResponseMessage.INVALID_TOKEN, StatusCode.IM_A_TEAPOT));
                 return;
             }
 
-            /* TODO */
-            const row = null;
+            const userRepository = AppDataSource.getRepository(User);
 
-            if (row === null) {
+            const existingUser = await userRepository.findOneBy({
+                id: user.id,
+                email: user.email,
+                name: user.name,
+            });
+
+            if (!existingUser) {
                 next(new ResponseError(ResponseMessage.USER_NOT_EXISTS, StatusCode.IM_A_TEAPOT));
                 return;
             }
 
             res.setHeader('Content-Type', ContentType.JSON);
+            next();
         } catch (err) {
             console.log(err);
+
+            res.statusCode = StatusCode.INTERNAL_SERVER_ERROR;
+            res.end();
         }
     }
 
     /** Middleware for coordinators users. */
     static async restaurantMiddleware (req: Request<any>, res: Response, next: NextFunction) {
         try {
-            const token = req.get('Authorization');
+            const token = req.get(Headers.AUTHORIZATION);
 
             if (!token) {
                 next(new ResponseError(ResponseMessage.NO_AUTH_TOKEN, StatusCode.UNAUTHORIZED));
@@ -65,7 +78,7 @@ export class Middleware {
             /* TODO */
             const row = null;
 
-            if (row === null) {
+            if (!row) {
                 next(new ResponseError(ResponseMessage.USER_NOT_EXISTS, StatusCode.IM_A_TEAPOT));
                 return;
             }
@@ -74,6 +87,9 @@ export class Middleware {
             next();
         } catch (err) {
             console.log(err);
+
+            res.statusCode = StatusCode.INTERNAL_SERVER_ERROR;
+            res.end();
         }
     }
 

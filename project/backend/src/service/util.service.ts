@@ -9,4 +9,12 @@ export class UtilService {
 
         return result;
     }
+
+    static removeArrayFromOtherArray(source: any[] | undefined, arr: any[]) {
+        if (source === undefined) {
+            return source;
+        }
+
+        return source.filter(el => !arr.includes(el));
+    }
 }

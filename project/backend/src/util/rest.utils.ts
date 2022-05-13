@@ -8,6 +8,8 @@ export enum ResponseMessage {
     ERROR_SENDING_MAIL = 'Error sending mail',
     INVALID_CODE = 'Invalid code',
     MISSING_PHOTO = 'Missing photo',
+    EMPTY_CART = 'Empty cart',
+    NOT_ENOUGH_FOUNDS = 'Not enough founds',
 }
 
 export enum ContentType {
@@ -16,6 +18,10 @@ export enum ContentType {
     ZIP = 'application/zip',
     DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     XLSX = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+}
+
+export enum Headers {
+    AUTHORIZATION = 'Authorization',
 }
 
 /** Contains the request responses */

@@ -6,4 +6,6 @@ export class Endpoints {
     static RESTAURANT_LOGIN = '/login/restaurant';
     static RESTAURANT_LOGIN_CODE = '/login-code/restaurant';
     static RESTAURANT_SIGNUP = '/signup/restaurant';
+
+    static ORDER = '/order';
 }
