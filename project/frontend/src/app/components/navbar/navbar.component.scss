@@ -1,0 +1,15 @@
+.navbar-container {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  height: 64px;
+  background-color: #90a8e0;
+}
+
+.navbar-items {
+  width: min(100%, 1720px);
+  display: flex;
+  align-items: center;
+  padding: 12px;
+}
