@@ -8,4 +8,6 @@ export class Endpoints {
     static RESTAURANT_SIGNUP = '/signup/restaurant';
 
     static ORDER = '/order';
+
+    static USER_CART = '/cart';
 }

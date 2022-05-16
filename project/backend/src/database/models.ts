@@ -59,7 +59,7 @@ export class FoodItem {
     @PrimaryGeneratedColumn()
     id: number = 0;
 
-    @Column({nullable: false, unique: true})
+    @Column({nullable: false})
     name: string = '';
 
     @Column({nullable: false})

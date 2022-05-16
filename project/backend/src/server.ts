@@ -52,6 +52,10 @@ app.post(Endpoints.RESTAURANT_SIGNUP, Middleware.visitorMiddleware, AuthControll
 
 app.post(Endpoints.ORDER, Middleware.userMiddleware, UserController.makeOrder);
 
+app.get(Endpoints.USER_CART, Middleware.userMiddleware, UserController.getUserCart);
+app.post(Endpoints.USER_CART, Middleware.userMiddleware, UserController.addFoodItemUserCart);
+app.delete(Endpoints.USER_CART, Middleware.userMiddleware, UserController.deleteFoodItemUserCart);
+
 /************************************************************************************
  *                               Express Error Handling
  ***********************************************************************************/

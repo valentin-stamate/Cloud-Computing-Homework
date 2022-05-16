@@ -98,4 +98,124 @@ export class UserController {
         res.end();
     }
 
+    static async getUserCart(req: Request<any>, res: Response, next: NextFunction) {
+        const token = req.get(Headers.AUTHORIZATION) as string;
+        const user = JwtService.verifyToken(token) as User;
+
+        const userRepository = AppDataSource.getRepository(User);
+        const existingUser = await userRepository.findOne({
+            where:{id: user.id},
+            relations:["foodItems"]
+        });
+
+        if (!existingUser) {
+            res.statusCode = StatusCode.NOT_FOUND;
+            res.end(ResponseMessage.USER_NOT_EXISTS);
+            return;
+        }
+
+        const foodList = existingUser.foodItems;
+
+        if (!foodList || foodList.length === 0) {
+            res.statusCode = StatusCode.OK;
+            res.end(ResponseMessage.EMPTY_CART);
+            return;
+        }
+
+        res.statusCode = StatusCode.OK;
+        res.end(JSON.stringify(foodList));
+    }
+
+    static async addFoodItemUserCart(req: Request<any>, res: Response, next: NextFunction) {
+        const token = req.get(Headers.AUTHORIZATION) as string;
+        const user = JwtService.verifyToken(token) as User;
+        const body = req.body;
+
+        if (!body.foodId) {
+            res.statusCode = StatusCode.BAD_REQUEST;
+            res.end(ResponseMessage.INVALID_FORM);
+            return;
+        }
+
+
+        const userRepository = AppDataSource.getRepository(User);
+        const existingUser = await userRepository.findOne({
+            where:{id: user.id},
+            relations:["foodItems"]
+        });
+
+        if (!existingUser) {
+            res.statusCode = StatusCode.NOT_FOUND;
+            res.end(ResponseMessage.USER_NOT_EXISTS);
+            return;
+        }
+
+        const foodItemRepository = AppDataSource.getRepository(FoodItem);
+        const existingFoodItem = await foodItemRepository.findOneBy({
+            id: body.foodId,
+        });
+
+        if (!existingFoodItem) {
+            res.statusCode = StatusCode.NOT_FOUND;
+            res.end(ResponseMessage.USER_NOT_EXISTS);
+            return;
+        }
+
+        const foodList = existingUser.foodItems;
+
+    
+        if (!foodList || foodList.length === 0) {
+            existingUser.foodItems=[existingFoodItem];
+        }else{
+            existingUser.foodItems?.push(existingFoodItem);
+        }
+        await AppDataSource.manager.save(existingUser);
+        res.statusCode = StatusCode.CREATED;
+        res.end();
+    }
+
+    static async deleteFoodItemUserCart(req: Request<any>, res: Response, next: NextFunction) {
+        const token = req.get(Headers.AUTHORIZATION) as string;
+        const user = JwtService.verifyToken(token) as User;
+        const body = req.body;
+
+        if (!body.foodId) {
+            res.statusCode = StatusCode.BAD_REQUEST;
+            res.end(ResponseMessage.INVALID_FORM);
+            return;
+        }
+
+
+        const userRepository = AppDataSource.getRepository(User);
+        const existingUser = await userRepository.findOne({
+            where:{id: user.id},
+            relations:["foodItems"]
+        });
+
+        if (!existingUser) {
+            res.statusCode = StatusCode.NOT_FOUND;
+            res.end(ResponseMessage.USER_NOT_EXISTS);
+            return;
+        }
+
+        const foodItemRepository = AppDataSource.getRepository(FoodItem);
+        const existingFoodItem = await foodItemRepository.findOneBy({
+            id: body.foodId,
+        });
+
+        if (!existingFoodItem) {
+            res.statusCode = StatusCode.NOT_FOUND;
+            res.end(ResponseMessage.USER_NOT_EXISTS);
+            return;
+        }
+        
+        existingUser.foodItems = existingUser.foodItems?.filter(foodItem => {
+            return foodItem.id != body.foodId
+        });
+        await AppDataSource.manager.save(existingUser);
+
+
+        res.statusCode = StatusCode.OK;
+        res.end();
+    }
 }
