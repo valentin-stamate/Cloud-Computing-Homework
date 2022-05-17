@@ -157,7 +157,7 @@ export class UserController {
 
         if (!existingFoodItem) {
             res.statusCode = StatusCode.NOT_FOUND;
-            res.end(ResponseMessage.USER_NOT_EXISTS);
+            res.end(ResponseMessage.FOOD_NOT_EXISTS);
             return;
         }
 
@@ -205,7 +205,7 @@ export class UserController {
 
         if (!existingFoodItem) {
             res.statusCode = StatusCode.NOT_FOUND;
-            res.end(ResponseMessage.USER_NOT_EXISTS);
+            res.end(ResponseMessage.FOOD_NOT_EXISTS);
             return;
         }
         

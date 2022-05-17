@@ -70,4 +70,22 @@ export class FoodItem {
 
     @ManyToOne(() => Restaurant, restaurant => restaurant.foodItems)
     restaurant: Restaurant = undefined as any;
+
+    @OneToMany(() => Price, priceHistory => priceHistory.foodItem)
+    priceHistory?: Price[];
+}
+
+@Entity()
+export class Price {
+    @PrimaryGeneratedColumn()
+    id: number = 0;
+
+    @Column({nullable: false})
+    value: number = 0;
+
+    @Column({ type: 'timestamptz', nullable: false })
+    modifyDate: Date = new Date();
+
+    @ManyToOne(() => FoodItem, foodItem => foodItem.priceHistory, { onDelete: 'CASCADE' })
+    foodItem: FoodItem = undefined as any;
 }

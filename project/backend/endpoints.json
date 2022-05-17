@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "04307292-190f-4665-a1a1-bb3de78ab5b4",
+		"_postman_id": "56a4dda3-e5c6-46ab-a387-41d9318c81f3",
 		"name": "Cloud Project",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -18,12 +18,12 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "ValentinSt",
+									"value": "Valeria",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "stamatevalentin125@gmail.com",
+									"value": "valeria.izvoreanu@gmail.com",
 									"type": "text"
 								}
 							]
@@ -50,17 +50,17 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "ValentinSt",
+									"value": "Valeria",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "stamatevalentin125@gmail.com",
+									"value": "valeria.izvoreanu@gmail.com",
 									"type": "text"
 								},
 								{
 									"key": "code",
-									"value": "tqS0GKZvGiTXSIaL",
+									"value": "cAurMUaZvyiDZB6D",
 									"type": "text"
 								}
 							]
@@ -87,12 +87,12 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "ValentinSt",
+									"value": "Valeria",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "stamatevalentin125@gmail.com",
+									"value": "valeria.izvoreanu@gmail.com",
 									"type": "text"
 								},
 								{
@@ -124,12 +124,12 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "",
+									"value": "mc",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "",
+									"value": "valeria.izvoreanu@gmail.com",
 									"type": "text"
 								}
 							]
@@ -157,12 +157,17 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "",
+									"value": "mc",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "",
+									"value": "valeria.izvoreanu@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "cjyy0IPvVlyNAvaw",
 									"type": "text"
 								}
 							]
@@ -190,23 +195,23 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "",
+									"value": "mc",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "",
+									"value": "valeria.izvoreanu@gmail.com",
 									"type": "text"
 								},
 								{
 									"key": "profilePhoto",
-									"value": "",
-									"type": "text"
+									"type": "file",
+									"src": "/D:/mine/download (1).jpg"
 								},
 								{
 									"key": "coverPhoto",
-									"value": "",
-									"type": "text"
+									"type": "file",
+									"src": "/D:/mine/books.png"
 								}
 							]
 						},
@@ -250,12 +255,259 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get Cart",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/cart",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add food item in cart",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "foodId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/cart",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete food item from cart",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "foodId",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/cart",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cart"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
 			"name": "Restaurant",
-			"item": []
+			"item": [
+				{
+					"name": "Get food items",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{restaurant_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/food-item",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"food-item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add food item",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{restaurant_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "rosii",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "details",
+									"value": "very tasty",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}\\food-item",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"food-item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get food Item",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{restaurant_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/food-item/4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"food-item",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Food Item",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{restaurant_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "sarmale cu varza",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "7",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/food-item/4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"food-item",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Food Item",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{restaurant_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{host}}/food-item/4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"food-item",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -286,6 +538,11 @@
 		},
 		{
 			"key": "user_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "restaurant_token",
 			"value": "",
 			"type": "string"
 		}
