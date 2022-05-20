@@ -10,6 +10,7 @@ export enum ResponseMessage {
     MISSING_PHOTO = 'Missing photo',
     EMPTY_CART = 'Empty cart',
     NOT_ENOUGH_FOUNDS = 'Not enough founds',
+    FOOD_NOT_EXISTS = 'Food doesn\'t exist'
 }
 
 export enum ContentType {
