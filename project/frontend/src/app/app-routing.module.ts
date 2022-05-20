@@ -7,6 +7,7 @@ import {HomeComponent} from "./components/home/home.component";
 import { DishComponent } from './components/dish/dish.component';
 import { OwnerComponent } from './components/owner/owner.component';
 import { BasketComponent } from './components/basket/basket.component';
+import { UserComponent } from './components/user/user.component';
 
 const routes: Routes = [
   {path: 'restaurant', component: RestaurantComponent},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'dish', component: DishComponent},
   {path: 'owner', component: OwnerComponent},
-  {path: 'basket', component: BasketComponent}
+  {path: 'basket', component: BasketComponent},
+  {path: 'user', component: UserComponent}
 ];
 
 @NgModule({

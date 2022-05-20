@@ -11,6 +11,7 @@ import { HomeComponent } from './components/home/home.component';
 import { DishComponent } from './components/dish/dish.component';
 import { OwnerComponent } from './components/owner/owner.component';
 import { BasketComponent } from './components/basket/basket.component';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { BasketComponent } from './components/basket/basket.component';
     HomeComponent,
     DishComponent,
     OwnerComponent,
-    BasketComponent
+    BasketComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
