@@ -1,0 +1,29 @@
+<app-navbar></app-navbar>
+<div class="restaurant-container">
+    <div class="restaurant-items">
+  
+      <div class="restaurant-info"></div>
+  
+      <div class="title">Your Basket:</div>
+      <div class="food-container">
+  
+        <div class="food-item-container" *ngFor="let i of [1, 2, 3, 4, 5]">
+          <div class="food-item">
+            <div class="food-item-info">
+              <div class="title is-4"><b>Title</b></div>
+              <div class="">Info</div>
+              <div class="title is-6">36lei</div>
+              <button type="button" class="btn btn-outline-danger">Delete dish</button>
+            </div>
+  
+            <div class="food-photo"></div>
+          </div>
+        </div>
+  
+  
+      </div>
+      <div class="title">Total: 180 lei</div>
+      <button type="button" class="place-order btn btn-outline-success">Place your order</button>
+    </div>
+  </div>
+  

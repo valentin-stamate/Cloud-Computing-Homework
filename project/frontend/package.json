@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "component": "ng generate component owner",
+    "component": "ng generate component basket",
     "test": "ng test"
   },
   "private": true,
