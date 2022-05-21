@@ -5,8 +5,134 @@ html {
   margin: 0;
 }
 
+img {
+  user-select: none;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: #F8F8F8;
+  background-color: #F8F8F8 !important;
+}
+
+.page-container {
+  display: flex;
+  justify-content: center;
+}
+
+.page-content {
+  width: min(100%, 1440px);
+  display: flex;
+  gap: 32px;
+  flex-direction: column;
+  padding: 0 32px 32px 32px;
+}
+
+.restaurant-cover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  aspect-ratio: 16 / 6;
+  background-color: antiquewhite;
+  border-radius: 0 0 32px 32px;
+}
+
+.restaurant-profile {
+  width: 128px;
+  aspect-ratio: 1 / 1;
+  background-color: #90a8e0;
+  border-radius: 12px;
+}
+
+.restaurant-info {
+  padding: 32px;
+  background-color: white;
+  border-radius: 12px;
+}
+
+/* Food Items */
+.food-items-container, .restaurant-items-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.food-item-container, .restaurant-item-container {
+  display: flex;
+  justify-content: center;
+  width: min(100%, 360px);
+  flex-grow: 1;
+}
+
+.food-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: min(100%, 360px);
+  padding: 16px;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.food-item-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.food-photo {
+  justify-self: end;
+  width: min(100%, 128px);
+  aspect-ratio: 1 / 1;
+  background-color: antiquewhite;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* Restaurant Items */
+.restaurant-item-container {
+  display: flex;
+  justify-content: center;
+  width: min(100%, 420px);
+  flex-grow: 1;
+}
+
+.restaurant-item {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: min(100%, 420px);
+  padding: 16px;
+  background-color: white;
+  border-radius: 8px;
+
+  .photo-cover {
+    position: relative;
+
+    .cover {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 8;
+      background-color: burlywood;
+      border-radius: 8px;
+      overflow: hidden;
+      object-fit: cover;
+    }
+
+    .profile {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      width: 96px;
+      aspect-ratio: 1 / 1;
+      background-color: #c5c5c5;
+      border-radius: 8px;
+      border: white 6px solid;
+      box-sizing: border-box;
+      object-fit: cover;
+    }
+  }
+
+
 }

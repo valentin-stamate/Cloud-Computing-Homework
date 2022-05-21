@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
   }
-  
+
   .basket-items {
     width: min(100%, 1440px);
     display: flex;
@@ -10,27 +10,27 @@
     flex-direction: column;
     padding: 0 32px 32px 32px;
   }
-  
+
   .basket-info {
     padding: 32px;
     background-color: white;
     border-radius: 12px;
   }
-  
-  .food-container {
+
+  .food-items-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 24px;
   }
-  
+
   .food-item-container {
     display: flex;
     justify-content: center;
     width: min(100%, 360px);
     flex-grow: 1;
   }
-  
+
   .food-item {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -39,13 +39,13 @@
     background-color: white;
     border-radius: 8px;
   }
-  
+
   .food-item-info {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
-  
+
   .food-photo {
     justify-self: end;
     width: min(100%, 150px);

@@ -1,1 +1,45 @@
 <app-navbar></app-navbar>
+
+<div class="page-container">
+  <div class="page-content pt-4">
+
+    <div class="title">Ultimele meniuri</div>
+
+    <div class="food-items-container">
+
+      <div class="food-item-container" *ngFor="let item of foodItems">
+        <div class="food-item">
+          <div class="food-item-info">
+            <div class="title is-4"><b>{{item.name}}</b></div>
+            <div class="">{{item.details}}</div>
+            <div class="title is-6">{{item.price}}lei</div>
+          </div>
+
+          <img class="food-photo" src="{{item.photoUrl}}">
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="title">Top restaurante</div>
+
+    <div class="restaurant-items-container">
+
+      <div class="restaurant-item-container" *ngFor="let item of restaurants">
+        <div class="restaurant-item">
+
+          <div class="photo-cover">
+            <img class="cover" src="{{item.coverPhotoUrl}}" alt="">
+            <img class="profile" src="{{item.profilePhotoUrl}}" alt="">
+          </div>
+
+          <div class="title is-4">{{item.name}}</div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

@@ -1,9 +1,9 @@
-.restaurant-container {
+.page-container {
   display: flex;
   justify-content: center;
 }
 
-.restaurant-items {
+.page-content {
   width: min(100%, 1440px);
   display: flex;
   gap: 32px;
@@ -130,8 +130,8 @@ $main-color: antiquewhite;
 			top: 0;
 			left: 0;
 			right: 0;
-			height: 2px; 
-			background: fade-out(pink, .7); 
+			height: 2px;
+			background: fade-out(pink, .7);
 		}
 		.line-2 {
 			@extend .line-1;
