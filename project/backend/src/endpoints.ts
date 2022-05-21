@@ -7,7 +7,12 @@ export class Endpoints {
     static RESTAURANT_LOGIN = '/login/restaurant';
     static RESTAURANT_LOGIN_CODE = '/login-code/restaurant';
     static RESTAURANT_SIGNUP = '/signup/restaurant';
-    static RESSTAURANT_FOOD_ITEM = '/food-item';
+    static RESTAURANT_FOOD_ITEM = '/food-item';
 
     static ORDER = '/order';
+
+    static LAST_FOOD = '/last-food';
+    static LAST_RESTAURANTS = '/last-restaurants';
+    static FOOD = '/food';
+    static RESTAURANT = '/restaurant'
 }

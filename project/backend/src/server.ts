@@ -9,6 +9,7 @@ import {Endpoints} from "./endpoints";
 import {AuthController} from "./controller/auth.controller";
 import {UserController} from "./controller/user.controller";
 import {RestaurantController} from "./controller/restaurant.controller";
+import {VisitorController} from "./controller/visitor.controller";
 require('dotenv').config();
 
 const env = process.env;
@@ -17,7 +18,9 @@ const app = express();
 const port = env.PORT;
 const host = `http://localhost:${port}`;
 
-connectDatabase();
+connectDatabase(false).catch(err => {
+    console.log(err);
+});
 
 /************************************************************************************
  *                              Basic Express Middlewares
@@ -43,6 +46,12 @@ if (process.env.NODE_ENV === 'production') {
  ***********************************************************************************/
 app.use(fileUpload());
 
+app.get(Endpoints.LAST_FOOD, Middleware.visitorMiddleware, VisitorController.getLastFood);
+app.get(Endpoints.LAST_RESTAURANTS, Middleware.visitorMiddleware, VisitorController.getLastRestaurants);
+app.get(`${Endpoints.RESTAURANT}/:restaurantId`, Middleware.visitorMiddleware, VisitorController.getRestaurant);
+app.get(`${Endpoints.FOOD}/:foodItemId`, Middleware.visitorMiddleware, VisitorController.getFoodItem);
+
+
 app.post(Endpoints.USER_LOGIN, Middleware.visitorMiddleware, AuthController.userLogin);
 app.post(Endpoints.USER_LOGIN_CODE, Middleware.visitorMiddleware, AuthController.userLoginWithCode);
 app.post(Endpoints.USER_SIGNUP, Middleware.visitorMiddleware, AuthController.userSignup);
@@ -57,11 +66,11 @@ app.get(Endpoints.USER_CART, Middleware.userMiddleware, UserController.getUserCa
 app.post(Endpoints.USER_CART, Middleware.userMiddleware, UserController.addFoodItemUserCart);
 app.delete(Endpoints.USER_CART, Middleware.userMiddleware, UserController.deleteFoodItemUserCart);
 
-app.post(Endpoints.RESSTAURANT_FOOD_ITEM, Middleware.visitorMiddleware, RestaurantController.addFoodItem);
-app.get(Endpoints.RESSTAURANT_FOOD_ITEM, Middleware.visitorMiddleware, RestaurantController.getRestaurantFoodItems);
-app.get(`${Endpoints.RESSTAURANT_FOOD_ITEM}/:foodItemId`, Middleware.visitorMiddleware, RestaurantController.getRestaurantFoodItem);
-app.patch(`${Endpoints.RESSTAURANT_FOOD_ITEM}/:foodItemId`, Middleware.visitorMiddleware, RestaurantController.updateFoodItem);
-app.delete(`${Endpoints.RESSTAURANT_FOOD_ITEM}/:foodItemId`, Middleware.visitorMiddleware, RestaurantController.deleteFoodItem);
+app.post(Endpoints.RESTAURANT_FOOD_ITEM, Middleware.visitorMiddleware, RestaurantController.addFoodItem);
+app.get(Endpoints.RESTAURANT_FOOD_ITEM, Middleware.visitorMiddleware, RestaurantController.getRestaurantFoodItems);
+app.get(`${Endpoints.RESTAURANT_FOOD_ITEM}/:foodItemId`, Middleware.visitorMiddleware, RestaurantController.getRestaurantFoodItem);
+app.patch(`${Endpoints.RESTAURANT_FOOD_ITEM}/:foodItemId`, Middleware.visitorMiddleware, RestaurantController.updateFoodItem);
+app.delete(`${Endpoints.RESTAURANT_FOOD_ITEM}/:foodItemId`, Middleware.visitorMiddleware, RestaurantController.deleteFoodItem);
 
 /************************************************************************************
  *                               Express Error Handling

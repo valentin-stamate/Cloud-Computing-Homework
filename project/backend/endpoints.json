@@ -1,12 +1,13 @@
 {
 	"info": {
-		"_postman_id": "56a4dda3-e5c6-46ab-a387-41d9318c81f3",
+		"_postman_id": "a6155f55-a282-47f0-ab3a-09c2e4f19d0a",
 		"name": "Cloud Project",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12026756"
 	},
 	"item": [
 		{
-			"name": "Visitor",
+			"name": "Auth",
 			"item": [
 				{
 					"name": "User Login",
@@ -405,7 +406,7 @@
 							]
 						},
 						"url": {
-							"raw": "{{host}}\\food-item",
+							"raw": "{{host}}/food-item",
 							"host": [
 								"{{host}}"
 							],
@@ -502,6 +503,81 @@
 							"path": [
 								"food-item",
 								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vizitor",
+			"item": [
+				{
+					"name": "Last Food",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/last-food",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"last-food"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Last Restaurants",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/last-restaurants",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"last-restaurants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Food",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/food/8",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"food",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Restaurant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/restaurant/8",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restaurant",
+								"8"
 							]
 						}
 					},
