@@ -18,7 +18,7 @@ const app = express();
 const port = env.PORT;
 const host = `http://localhost:${port}`;
 
-connectDatabase(false).catch(err => {
+connectDatabase(true).catch(err => {
     console.log(err);
 });
 
@@ -32,9 +32,9 @@ app.use(express.urlencoded({extended: true}));
 
 // Handle logs in console during development
 app.use(morgan('dev'));
-if (process.env.NODE_ENV === 'development') {
-    app.use(cors({origin: ['*']}));
-}
+app.use(cors({origin: ['http://localhost:4200']}));
+// if (process.env.NODE_ENV === 'development') {
+// }
 
 // Handle security and origin in production
 if (process.env.NODE_ENV === 'production') {

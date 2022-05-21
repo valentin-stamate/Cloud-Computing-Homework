@@ -68,6 +68,9 @@ export class FoodItem {
     @Column({nullable: false})
     details: string = '';
 
+    @Column({nullable: false})
+    photoUrl: string = '';
+
     @ManyToOne(() => Restaurant, restaurant => restaurant.foodItems)
     restaurant: Restaurant = undefined as any;
 

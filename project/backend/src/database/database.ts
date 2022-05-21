@@ -38,8 +38,8 @@ export async function connectDatabase(rewrite: boolean = false) {
 
         const restaurant = new Restaurant();
         restaurant.name = 'Fast Pizza';
-        restaurant.profilePhotoUrl = '';
-        restaurant.coverPhotoUrl = '';
+        restaurant.profilePhotoUrl = 'http://www.foodngo.it/assets/images/data/restaurant3.jpg';
+        restaurant.coverPhotoUrl = 'https://i.pinimg.com/736x/0e/b9/9c/0eb99cd32c6f85eb628c91efb51157d4.jpg';
         restaurant.email = 'stamatevalentin125@gmail.com';
 
         const foodItemA = new FoodItem();
@@ -47,12 +47,14 @@ export async function connectDatabase(rewrite: boolean = false) {
         foodItemA.price = 20;
         foodItemA.details = 'Apa 200g, Legume 200g';
         foodItemA.restaurant = restaurant;
+        foodItemA.photoUrl = 'https://retete-culinare-cu-dana-valery.ro/cdn/recipes/ciorba-radauteana-cu-carne-de-curcan.jpg';
 
         const foodItemB = new FoodItem();
         foodItemB.name = 'Ciorba de Burta';
         foodItemB.price = 21;
         foodItemB.details = 'Apa 200g, Legume 210g';
         foodItemB.restaurant = restaurant;
+        foodItemB.photoUrl = 'https://www.lauralaurentiu.ro/wp-content/uploads/2010/03/ciorba-de-burta-reteta-cu-poze-cum-se-face-ciorba-de-burta-ingrediente-mod-de-preparare-ciorba-de-burta-reteta-laura-laurentiu.jpg';
 
         restaurant.foodItems = [foodItemA, foodItemB];
 
