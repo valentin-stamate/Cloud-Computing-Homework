@@ -68,17 +68,19 @@ export class Middleware {
                 return;
             }
 
-            const user = JwtService.verifyToken(token) as Restaurant;
+            const restaurant = JwtService.verifyToken(token) as Restaurant;
 
-            if (user === null) {
+            if (restaurant === null) {
                 next(new ResponseError(ResponseMessage.INVALID_TOKEN, StatusCode.IM_A_TEAPOT));
                 return;
             }
 
-            /* TODO */
-            const row = null;
+            const restaurantRepository = AppDataSource.getRepository(Restaurant);
+            const existingRestaurant = await restaurantRepository.findOneBy({
+                id: restaurant.id,
+            })
 
-            if (!row) {
+            if (!existingRestaurant) {
                 next(new ResponseError(ResponseMessage.USER_NOT_EXISTS, StatusCode.IM_A_TEAPOT));
                 return;
             }

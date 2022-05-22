@@ -18,7 +18,7 @@ const app = express();
 const port = env.PORT;
 const host = `http://localhost:${port}`;
 
-connectDatabase(true).catch(err => {
+connectDatabase(false).catch(err => {
     console.log(err);
 });
 
@@ -66,11 +66,11 @@ app.get(Endpoints.USER_CART, Middleware.userMiddleware, UserController.getUserCa
 app.post(Endpoints.USER_CART, Middleware.userMiddleware, UserController.addFoodItemUserCart);
 app.delete(Endpoints.USER_CART, Middleware.userMiddleware, UserController.deleteFoodItemUserCart);
 
-app.post(Endpoints.RESTAURANT_FOOD_ITEM, Middleware.visitorMiddleware, RestaurantController.addFoodItem);
-app.get(Endpoints.RESTAURANT_FOOD_ITEM, Middleware.visitorMiddleware, RestaurantController.getRestaurantFoodItems);
-app.get(`${Endpoints.RESTAURANT_FOOD_ITEM}/:foodItemId`, Middleware.visitorMiddleware, RestaurantController.getRestaurantFoodItem);
-app.patch(`${Endpoints.RESTAURANT_FOOD_ITEM}/:foodItemId`, Middleware.visitorMiddleware, RestaurantController.updateFoodItem);
-app.delete(`${Endpoints.RESTAURANT_FOOD_ITEM}/:foodItemId`, Middleware.visitorMiddleware, RestaurantController.deleteFoodItem);
+app.post(Endpoints.RESTAURANT_FOOD_ITEM, Middleware.restaurantMiddleware, RestaurantController.addFoodItem);
+app.get(Endpoints.RESTAURANT_FOOD_ITEM, Middleware.restaurantMiddleware, RestaurantController.getRestaurantFoodItems);
+app.get(`${Endpoints.RESTAURANT_FOOD_ITEM}/:foodItemId`, Middleware.restaurantMiddleware, RestaurantController.getRestaurantFoodItem);
+app.patch(`${Endpoints.RESTAURANT_FOOD_ITEM}/:foodItemId`, Middleware.restaurantMiddleware, RestaurantController.updateFoodItem);
+app.delete(`${Endpoints.RESTAURANT_FOOD_ITEM}/:foodItemId`, Middleware.restaurantMiddleware, RestaurantController.deleteFoodItem);
 
 /************************************************************************************
  *                               Express Error Handling
