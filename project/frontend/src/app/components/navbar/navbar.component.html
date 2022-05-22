@@ -3,20 +3,38 @@
 
     <div class="logo"></div>
 
-    <div class="control has-icons-left has-icons-right">
-      <input class="input" type="text" placeholder="Search">
-      <span class="icon is-small is-left">
-        <i class="fas fa-envelope"></i>
-      </span>
-      <span class="icon is-small is-right">
-        <i class="fas fa-check"></i>
-      </span>
+    <div class="is-flex" style="gap: 16px">
+      <div class="control has-icons-left has-icons-right" style="position: relative">
+        <input class="input" type="text" placeholder="Search" #searchInput>
+        <span class="icon is-small is-left">
+          <i class="fas fa-envelope"></i>
+        </span>
+
+        <div class="search-box" *ngIf="searchBoxOpen">
+          <div class="searched-food-item" *ngFor="let item of searchedFood">
+            <img class="searched-food-image" src="{{item.photoUrl}}" alt="">
+            <div>{{item.name}}</div>
+
+            <div class="is-flex-grow-1"></div>
+
+            <div>{{item.price}}lei</div>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="button" (click)="onSearch(searchInput)">Search</button>
+      <button class="button" (click)="onSearchClose()" *ngIf="searchBoxOpen">Close</button>
     </div>
+
+
+
 
     <div class="is-flex-grow-1"></div>
 
-<!--    <div class="title is-6">username</div>-->
-    <button type="button" routerLink="/login" class="button is-primary">Login</button>
+    <div *ngIf="logged && userType === 1">{{'300'}}C</div>
+    <div routerLink="/user" class="title is-6" *ngIf="logged">{{user.name}}</div>
+    <button type="button" routerLink="/login" class="button is-primary" *ngIf="!logged">Login</button>
 
   </div>
 </div>

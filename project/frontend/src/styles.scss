@@ -9,6 +9,12 @@ img {
   user-select: none;
 }
 
+.center {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -73,6 +79,7 @@ body {
   padding: 16px;
   background-color: white;
   border-radius: 8px;
+  border: #d0d0d0 1px solid;
 }
 
 .food-item-info {
@@ -106,6 +113,7 @@ body {
   padding: 16px;
   background-color: white;
   border-radius: 8px;
+  border: #d0d0d0 1px solid;
 
   .photo-cover {
     position: relative;

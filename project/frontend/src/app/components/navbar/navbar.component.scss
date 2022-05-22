@@ -1,3 +1,33 @@
+.search-box {
+  position: absolute;
+  width: 100%;
+  top: 50px;
+  background-color: white;
+  border-radius: 4px;
+  border: #d0d0d0 1px solid;
+  overflow: auto;
+  max-height: 340px;
+  z-index: 10;
+
+  .searched-food-item {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    padding: 8px;
+    align-items: center;
+
+    .searched-food-image {
+      background-color: #90a8e0;
+      border-radius: 4px;
+      overflow: hidden;
+      height: 100%;
+      width: 54px;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+  }
+}
+
 .navbar-container {
   position: sticky;
   top: 0;
