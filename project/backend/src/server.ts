@@ -50,6 +50,7 @@ app.get(Endpoints.LAST_FOOD, Middleware.visitorMiddleware, VisitorController.get
 app.get(Endpoints.LAST_RESTAURANTS, Middleware.visitorMiddleware, VisitorController.getLastRestaurants);
 app.get(`${Endpoints.RESTAURANT}/:restaurantId`, Middleware.visitorMiddleware, VisitorController.getRestaurant);
 app.get(`${Endpoints.FOOD}/:foodItemId`, Middleware.visitorMiddleware, VisitorController.getFoodItem);
+app.get(Endpoints.SEARCH, Middleware.visitorMiddleware, VisitorController.searchFood);
 
 
 app.post(Endpoints.USER_LOGIN, Middleware.visitorMiddleware, AuthController.userLogin);
