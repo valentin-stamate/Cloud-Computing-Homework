@@ -14,5 +14,7 @@ export class Endpoints {
     static LAST_FOOD = '/last-food';
     static LAST_RESTAURANTS = '/last-restaurants';
     static FOOD = '/food';
-    static RESTAURANT = '/restaurant'
+    static RESTAURANT = '/restaurant';
+
+    static SEARCH = '/search';
 }

@@ -66,4 +66,38 @@ export class VisitorController {
         res.end(JSON.stringify(existingFood));
     }
 
+    static async searchFood(req: Request<any>, res: Response, next: NextFunction) {
+        const body = req.body;
+
+        if (!body.searchText) {
+            res.statusCode = StatusCode.BAD_REQUEST;
+            res.end(ResponseMessage.INVALID_FORM);
+            return;
+        }
+
+        body.searchText = body.searchText.toLowerCase()
+
+
+        const foodRepository = AppDataSource.getRepository(FoodItem);
+
+        const formattedQuery = body.searchText.trim().replace(/ /g, ' & ');
+        const foodList = await foodRepository
+            .createQueryBuilder()
+            .select('food_item')
+            .from(FoodItem, 'food_item')
+            .where(
+            `to_tsvector('simple',food_item.name) @@ to_tsquery('simple', :query)`,
+            { query: `${formattedQuery}:*` }
+            )
+            .getMany();
+
+        console.log(foodList);
+        res.statusCode = StatusCode.OK;
+        if (foodList.length !==0){
+            res.end(JSON.stringify(foodList));
+        }else{
+            res.end("No Item Found");
+        }
+        
+    }
 }

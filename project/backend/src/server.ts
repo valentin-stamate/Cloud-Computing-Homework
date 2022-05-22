@@ -50,6 +50,7 @@ app.get(Endpoints.LAST_FOOD, Middleware.visitorMiddleware, VisitorController.get
 app.get(Endpoints.LAST_RESTAURANTS, Middleware.visitorMiddleware, VisitorController.getLastRestaurants);
 app.get(`${Endpoints.RESTAURANT}/:restaurantId`, Middleware.visitorMiddleware, VisitorController.getRestaurant);
 app.get(`${Endpoints.FOOD}/:foodItemId`, Middleware.visitorMiddleware, VisitorController.getFoodItem);
+app.get(Endpoints.SEARCH, Middleware.visitorMiddleware, VisitorController.searchFood);
 
 
 app.post(Endpoints.USER_LOGIN, Middleware.visitorMiddleware, AuthController.userLogin);
@@ -65,6 +66,7 @@ app.post(Endpoints.ORDER, Middleware.userMiddleware, UserController.makeOrder);
 app.get(Endpoints.USER_CART, Middleware.userMiddleware, UserController.getUserCart);
 app.post(Endpoints.USER_CART, Middleware.userMiddleware, UserController.addFoodItemUserCart);
 app.delete(Endpoints.USER_CART, Middleware.userMiddleware, UserController.deleteFoodItemUserCart);
+
 
 app.post(Endpoints.RESTAURANT_FOOD_ITEM, Middleware.visitorMiddleware, RestaurantController.addFoodItem);
 app.get(Endpoints.RESTAURANT_FOOD_ITEM, Middleware.visitorMiddleware, RestaurantController.getRestaurantFoodItems);
