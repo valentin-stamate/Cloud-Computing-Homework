@@ -3,25 +3,27 @@
 <div class="page-container">
   <div class="page-content">
 
-    <div class="restaurant-cover">
-      <div class="restaurant-profile"></div>
+    <div class="restaurant-photo-container">
+      <img class="restaurant-cover" src="{{restaurantData.coverPhotoUrl}}" alt="">
+      <img class="restaurant-profile" src="{{restaurantData.profilePhotoUrl}}" alt="">
     </div>
 
-    <div class="restaurant-info"></div>
+
+<!--    <div class="restaurant-info"></div>-->
 
     <div class="title">Comenzi</div>
 
     <div class="food-items-container">
 
-      <div class="food-item-container" *ngFor="let i of [1, 2, 3, 4, 5]">
+      <div class="food-item-container" *ngFor="let item of restaurantFood">
         <div class="food-item">
           <div class="food-item-info">
-            <div class="title is-4"><b>Title</b></div>
-            <div class="">Info</div>
-            <div class="title is-6">36lei</div>
+            <div class="title is-4"><b>{{item.name}}</b></div>
+            <div class="">{{item.details}}</div>
+            <div class="title is-6">{{item.price}}lei</div>
           </div>
 
-          <div class="food-photo"></div>
+          <img class="food-photo" src="{{item.photoUrl}}">
         </div>
       </div>
 

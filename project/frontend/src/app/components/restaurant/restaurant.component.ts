@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {UrlService} from "../../service/url.service";
+import axios from "axios";
+import {Endpoints} from "../../service/endpoints";
+import {FoodItem, Restaurant} from "../../service/models";
 
 @Component({
   selector: 'app-restaurant',
@@ -7,9 +11,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RestaurantComponent implements OnInit {
 
-  constructor() { }
+  id: number = 0;
+  restaurantData: Restaurant = {} as Restaurant;
+  restaurantFood: FoodItem[] = [];
+
+  constructor() {
+    const id = UrlService.getParameterByName('id');
+
+    if (!id) {
+      return;
+    }
+
+    this.id = parseInt(id);
+  }
 
   ngOnInit(): void {
+    this.fetchRestaurant(this.id);
+  }
+
+  fetchRestaurant(id: number) {
+    axios.get(`${Endpoints.RESTAURANT}/${id}`)
+      .then(res => {
+        this.restaurantData = res.data;
+        this.restaurantFood = res.data.foodItems;
+      }).catch(err => {
+      console.log(err);
+    });
   }
 
 }

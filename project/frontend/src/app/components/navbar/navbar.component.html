@@ -33,7 +33,8 @@
     <div class="is-flex-grow-1"></div>
 
     <div *ngIf="logged && userType === 1">{{'300'}}C</div>
-    <div routerLink="/user" class="title is-6" *ngIf="logged">{{user.name}}</div>
+    <a routerLink="/user-profile" class="title is-6" *ngIf="logged && userType === 1">{{user.name}}</a>
+    <a routerLink="/restaurant-profile" class="title is-6" *ngIf="logged && userType === 2">{{user.name}}</a>
     <button type="button" routerLink="/login" class="button is-primary" *ngIf="!logged">Login</button>
 
   </div>

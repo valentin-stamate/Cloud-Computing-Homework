@@ -17,7 +17,7 @@ const routes: Routes = [
   {path: 'dish', component: DishComponent},
   {path: 'owner', component: OwnerComponent},
   {path: 'basket', component: BasketComponent},
-  {path: 'user', component: UserComponent}
+  {path: 'user', component: UserComponent},
 ];
 
 @NgModule({

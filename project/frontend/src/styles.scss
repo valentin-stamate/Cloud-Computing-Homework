@@ -34,22 +34,33 @@ body {
   padding: 0 32px 32px 32px;
 }
 
-.restaurant-cover {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  aspect-ratio: 16 / 6;
-  background-color: antiquewhite;
-  border-radius: 0 0 32px 32px;
+.restaurant-photo-container {
+  position: relative;
+
+  .restaurant-cover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    aspect-ratio: 16 / 6;
+    background-color: antiquewhite;
+    border-radius: 0 0 32px 32px;
+    object-fit: cover;
+  }
+
+  .restaurant-profile {
+    position: absolute;
+    top: 32px;
+    left: 32px;
+    width: 128px;
+    aspect-ratio: 1 / 1;
+    background-color: #90a8e0;
+    border-radius: 12px;
+    border: white 4px solid;
+    object-fit: cover;
+  }
 }
 
-.restaurant-profile {
-  width: 128px;
-  aspect-ratio: 1 / 1;
-  background-color: #90a8e0;
-  border-radius: 12px;
-}
 
 .restaurant-info {
   padding: 32px;
