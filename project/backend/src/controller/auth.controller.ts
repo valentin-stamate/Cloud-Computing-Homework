@@ -6,6 +6,7 @@ import {JwtService} from "../service/jwt.service";
 import {EmailDefaults, LoginTemplate, MailService} from "../service/mail.service";
 import {UtilService} from "../service/util.service";
 import {UploadedFile} from "express-fileupload";
+import { StoreService } from "../service/store.service";
 
 export class AuthController {
     /* -----------======================== User ========================----------- */
@@ -256,13 +257,32 @@ export class AuthController {
             return;
         }
 
+        var split = profilePhoto.name.split('.');
+
+        let extension = '';
+        if (split.length !== 0) {
+            extension = split[split.length - 1];
+        }
+
+        const profilePhotoName = `${UtilService.generateRandomString(16)}.${extension}`;
+        const profilePhotoUrl = await StoreService.uploadFile(profilePhoto.data, profilePhotoName);
+
+        split = coverPhoto.name.split('.');
+
+        extension = '';
+        if (split.length !== 0) {
+            extension = split[split.length - 1];
+        }
+
+        const coverPhotoName = `${UtilService.generateRandomString(16)}.${extension}`;
+        const coverPhotoUrl = await StoreService.uploadFile(profilePhoto.data, coverPhotoName);
+
         const restaurant = new Restaurant();
         restaurant.name = body.name;
         restaurant.email = body.email;
 
-        /* TODO: Using a Google Cloud service, get the url for the two photos and put them here */
-        restaurant.profilePhotoUrl = '';
-        restaurant.coverPhotoUrl = '';
+        restaurant.profilePhotoUrl = profilePhotoUrl as string;
+        restaurant.coverPhotoUrl = coverPhotoUrl as string;
 
         const restaurantRepository = AppDataSource.getRepository(Restaurant);
         const existingRestaurant = await restaurantRepository.findOneBy([

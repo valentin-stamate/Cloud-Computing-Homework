@@ -3,6 +3,9 @@ import {Headers, ResponseMessage, StatusCode} from "../util/rest.utils";
 import {JwtService} from "../service/jwt.service";
 import {FoodItem, User, Restaurant, Price} from "../database/models";
 import {AppDataSource} from "../database/database";
+import {UploadedFile} from "express-fileupload";
+import { StoreService } from "../service/store.service";
+import {UtilService} from "../service/util.service";
 
 export class RestaurantController {
     static async getRestaurantFoodItems(req: Request<any>, res: Response, next: NextFunction) {
@@ -15,15 +18,6 @@ export class RestaurantController {
             relations:["foodItems"]
         });
 
-        // const existingRestaurant = await AppDataSource.manager.createQueryBuilder(Restaurant,'restaurant')
-        //                                 .select("restaurant")
-        //                                 .addSelect("foodItem")
-        //                                 .addSelect("price")  
-        //                                 .innerJoin(FoodItem, 'foodItem', 'restaurant.id = foodItem.restaurant.id')
-        //                                 .innerJoin(Price, 'price', 'foodItem.id= price.foodItem.id')
-        //                                 .where('restaurant.id = :id', { id: restaurant.id })
-        //                                 .getMany() 
-        console.log(existingRestaurant);
         if (!existingRestaurant) {
             res.statusCode = StatusCode.NOT_FOUND;
             res.end(ResponseMessage.RESTAURANT_NOT_EXISTS);
@@ -97,6 +91,20 @@ export class RestaurantController {
         const restaurant = JwtService.verifyToken(token) as Restaurant;
         const body = req.body;
 
+        if (!req.files) {
+            res.statusCode = StatusCode.BAD_REQUEST;
+            res.end(ResponseMessage.INVALID_FORM);
+            return;
+        }
+
+        const foodPhoto = req.files.foodPhoto as UploadedFile;
+
+        if (!foodPhoto) {
+            res.statusCode = StatusCode.BAD_REQUEST;
+            res.end(ResponseMessage.MISSING_PHOTO);
+            return;
+        }
+
         if (!body.name || !body.price || !body.details) {
             res.statusCode = StatusCode.BAD_REQUEST;
             res.end(ResponseMessage.INVALID_FORM);
@@ -110,6 +118,15 @@ export class RestaurantController {
             return;
         }
 
+        var split = foodPhoto.name.split('.');
+
+        let extension = '';
+        if (split.length !== 0) {
+            extension = split[split.length - 1];
+        }
+
+        const foodPhotoName = `${UtilService.generateRandomString(16)}.${extension}`;
+        const foodPhotoUrl = await StoreService.uploadFile(foodPhoto.data, foodPhotoName);
 
         const restaurantRepository = AppDataSource.getRepository(Restaurant);
         const existingRestaurant = await restaurantRepository.findOne({
@@ -133,6 +150,7 @@ export class RestaurantController {
         newFoodItem.price=newPrice;
         newFoodItem.priceHistory=[newPriceHistory];
         newFoodItem.restaurant = existingRestaurant;
+        newFoodItem.photoUrl = foodPhotoUrl as string;
 
         newPriceHistory.foodItem = newFoodItem;
         
@@ -208,6 +226,26 @@ export class RestaurantController {
             existingFoodItem.details = body.details;
         }
 
+        if (req.files) {
+            const image = req.files.foodPhoto as UploadedFile;
+            var split = image.name.split('.');
+
+            let extension = '';
+            if (split.length !== 0) {
+                extension = split[split.length - 1];
+            }
+
+            const filename = `${UtilService.generateRandomString(16)}.${extension}`;
+            const fileUrl = await StoreService.uploadFile(image.data, filename);
+
+            split = existingFoodItem.photoUrl.split('/');
+            const oldName = split[split.length - 1];
+            await StoreService.deleteFile(oldName);
+
+            existingFoodItem.photoUrl=fileUrl as string;
+        }
+
+
         if (body.price){
             const newPrice = parseInt(body.price);
             if (isNaN(newPrice)){
@@ -278,6 +316,10 @@ export class RestaurantController {
         existingRestaurant.foodItems = existingRestaurant.foodItems?.filter(foodItem => {
             return foodItem.id != body.foodId
         });
+        const split = existingFoodItem.photoUrl.split('/');
+        const oldName = split[split.length - 1];
+        await StoreService.deleteFile(oldName);
+
         await AppDataSource.manager.save(existingRestaurant);
         await AppDataSource.createQueryBuilder()
                             .delete()
