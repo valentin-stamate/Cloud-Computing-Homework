@@ -7,7 +7,7 @@
     <div class="title is-4">Signup</div>
 
     <!-- User signup form -->
-    <form class="is-flex is-flex-direction-column" #signupUserForm *ngIf="authType - 1 === 0">
+    <form class="is-flex is-flex-direction-column" enctype="multipart/form-data" #signupUserForm *ngIf="authType - 1 === 0">
 
       <div class="field">
         <label class="label">Name</label>
@@ -48,7 +48,7 @@
     </form>
 
     <!-- Restaurant signup form -->
-    <form class="is-flex is-flex-direction-column" #signupRestaurantForm *ngIf="authType - 2 === 0">
+    <form class="is-flex is-flex-direction-column" enctype="multipart/form-data" #signupRestaurantForm *ngIf="authType - 2 === 0">
 
       <div class="field">
         <label class="label">Name</label>

@@ -1,0 +1,77 @@
+<app-navbar></app-navbar>
+
+<div class="page-container">
+  <div class="page-content">
+
+    <div class="restaurant-photo-container">
+      <img class="restaurant-cover" src="{{restaurant.coverPhotoUrl}}" alt="">
+      <img class="restaurant-profile" src="{{restaurant.profilePhotoUrl}}" alt="">
+    </div>
+
+
+    <div class="restaurant-info">
+
+      <form enctype="multipart/form-data" #foodForm>
+
+        <div class="field">
+          <label class="label">Name</label>
+          <div class="control">
+            <input name="name" class="input" type="text" placeholder="Name">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Price</label>
+          <div class="control">
+            <input name="price" class="input" type="number" placeholder="10">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Details</label>
+          <div class="control">
+            <textarea name="details" class="input" type="text" placeholder="Some food details"></textarea>
+          </div>
+        </div>
+
+        <div class="file">
+          <label class="file-label">
+            <input class="file-input" type="file" name="foodPhoto">
+            <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                  Food photo...
+                </span>
+              </span>
+          </label>
+        </div>
+
+        <button type="button" class="button is-primary" (click)="onAddFood(foodForm)">Add food</button>
+      </form>
+
+    </div>
+
+    <div class="title">Comenzi</div>
+
+    <div class="food-items-container">
+
+      <div class="food-item-container" *ngFor="let item of restaurant.foodItems">
+        <div class="food-item">
+          <div class="food-item-info">
+            <div class="title is-4"><b>{{item.name}}</b></div>
+            <div class="">{{item.details}}</div>
+            <div class="title is-6">{{item.price}}lei</div>
+          </div>
+
+          <img class="food-photo" src="{{item.photoUrl}}" alt="">
+
+          <button class="button is-danger" (click)="onDeleteFoodItem(item)">Delete</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

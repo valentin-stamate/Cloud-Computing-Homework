@@ -12,6 +12,7 @@ import { DishComponent } from './components/dish/dish.component';
 import { OwnerComponent } from './components/owner/owner.component';
 import { BasketComponent } from './components/basket/basket.component';
 import { UserComponent } from './components/user/user.component';
+import { RestaurantProfileComponent } from './components/restaurant-profile/restaurant-profile.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { UserComponent } from './components/user/user.component';
     DishComponent,
     OwnerComponent,
     BasketComponent,
-    UserComponent
+    UserComponent,
+    RestaurantProfileComponent
   ],
   imports: [
     BrowserModule,
