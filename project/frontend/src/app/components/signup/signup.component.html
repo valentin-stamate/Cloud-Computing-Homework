@@ -6,34 +6,110 @@
 
     <div class="title is-4">Signup</div>
 
-    <form class="is-flex is-flex-direction-column">
+    <!-- User signup form -->
+    <form class="is-flex is-flex-direction-column" #signupUserForm *ngIf="authType - 1 === 0">
 
       <div class="field">
         <label class="label">Name</label>
         <div class="control">
-          <input class="input" type="text" placeholder="user@mail.com">
+          <input name="name" class="input" type="text" placeholder="User">
         </div>
       </div>
 
       <div class="field">
         <label class="label">Email</label>
         <div class="control">
-          <input class="input" type="email" placeholder="user@mail.com">
+          <input name="email" class="input" type="email" placeholder="user@mail.com">
         </div>
       </div>
 
       <div class="field">
         <label class="label">Address</label>
         <div class="control">
-          <textarea class="textarea"></textarea>
+          <textarea name="address" class="textarea"></textarea>
         </div>
       </div>
 
-      <button class="button is-primary">Signup</button>
+      <div class="field">
+        <div class="control">
+          <label class="radio">
+            <input type="radio" name="question" (change)="changeAuthType(1)" [checked]="authType - 1 === 0">
+            I am user
+          </label>
+          <label class="radio">
+            <input type="radio" name="question" (change)="changeAuthType(2)" [checked]="authType - 2 === 0">
+            I am restaurant owner
+          </label>
+        </div>
+      </div>
+
+      <button type="button" class="button is-primary" (click)="onUserSignup(signupUserForm)">Signup</button>
 
     </form>
 
-    <div class="title is-6">Already have an account? Login.</div>
+    <!-- Restaurant signup form -->
+    <form class="is-flex is-flex-direction-column" #signupRestaurantForm *ngIf="authType - 2 === 0">
+
+      <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input name="name" class="input" type="text" placeholder="User">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <input name="email" class="input" type="email" placeholder="user@mail.com">
+        </div>
+      </div>
+
+      <div class="file">
+        <label class="file-label">
+          <input class="file-input" type="file" name="profilePhoto">
+          <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                  Profile photo...
+                </span>
+              </span>
+        </label>
+      </div>
+
+      <div class="file">
+        <label class="file-label">
+          <input class="file-input" type="file" name="coverPhoto">
+          <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                  Cover photo...
+                </span>
+              </span>
+        </label>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label class="radio">
+            <input type="radio" name="question" (change)="changeAuthType(1)" [checked]="authType - 1 === 0">
+            I am user
+          </label>
+          <label class="radio">
+            <input type="radio" name="question" (change)="changeAuthType(2)" [checked]="authType - 2 === 0">
+            I am restaurant owner
+          </label>
+        </div>
+      </div>
+
+      <button type="button" class="button is-primary" (click)="onRestaurantSignup(signupRestaurantForm)">Signup</button>
+
+    </form>
+
+    <div class="title is-6">Already have an account? <a routerLink="/login">Login.</a></div>
 
   </div>
 

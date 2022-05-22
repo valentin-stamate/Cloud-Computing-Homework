@@ -6,27 +6,89 @@
 
     <div class="title is-4">Login</div>
 
-    <form class="is-flex is-flex-direction-column">
+    <!-- User form -->
+    <form class="is-flex is-flex-direction-column" #loginForm *ngIf="authType - 1 === 0">
 
       <div class="field">
         <label class="label">Name</label>
         <div class="control">
-          <input class="input" type="text" placeholder="Alex">
+          <input name="name" class="input" type="text" placeholder="Alex" value="Valentin">
         </div>
       </div>
 
       <div class="field">
         <label class="label">Email</label>
         <div class="control">
-          <input class="input" type="text" placeholder="user@mail.com">
+          <input name="email" class="input" type="text" placeholder="user@mail.com" value="stamatevalentin125@gmail.com">
         </div>
       </div>
 
-      <button class="button is-primary">Login</button>
+      <div class="field" *ngIf="loginWithCode">
+        <label class="label">Code</label>
+        <div class="control">
+          <input name="code" class="input" type="password" placeholder="****">
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label class="radio">
+            <input type="radio" name="question" (change)="changeAuthType(1)" [checked]="authType - 1 === 0">
+            I am user
+          </label>
+          <label class="radio">
+            <input type="radio" name="question" (change)="changeAuthType(2)" [checked]="authType - 2 === 0">
+            I am restaurant owner
+          </label>
+        </div>
+      </div>
+
+      <button type="button" class="button is-primary" (click)="onLogin(loginForm)">Login</button>
 
     </form>
 
-    <div class="title is-6">New user? Signup.</div>
+    <!-- Restaurant form -->
+    <form class="is-flex is-flex-direction-column" #loginRestaurantForm *ngIf="authType - 2 === 0">
+
+      <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input name="name" class="input" type="text" placeholder="Alex" value="Fast Pizza">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <input name="email" class="input" type="text" placeholder="user@mail.com" value="stamatevalentin125@gmail.com">
+        </div>
+      </div>
+
+      <div class="field" *ngIf="loginWithCode">
+        <label class="label">Code</label>
+        <div class="control">
+          <input name="code" class="input" type="password" placeholder="****">
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label class="radio">
+            <input type="radio" name="question" (change)="changeAuthType(1)" [checked]="authType - 1 === 0">
+            I am user
+          </label>
+          <label class="radio">
+            <input type="radio" name="question" (change)="changeAuthType(2)" [checked]="authType - 2 === 0">
+            I am restaurant owner
+          </label>
+        </div>
+      </div>
+
+      <button type="button" class="button is-primary" (click)="onLoginRestaurant(loginRestaurantForm)">Login</button>
+
+    </form>
+
+    <div class="title is-6">New user? <a routerLink="/signup">Signup.</a></div>
 
   </div>
 
