@@ -33,6 +33,23 @@ export async function connectDatabase(rewrite: boolean = false) {
     const userRepository = AppDataSource.getRepository(User);
 
     if (rewrite) {
+        await foodRepository.query('DELETE FROM "user"');
+
+        const userA = new User();
+        userA.name = 'Valentin';
+        userA.email = 'stamatevalentin125@gmail.com';
+        userA.address = 'Str. Rosiorilor Nr. 4';
+        userA.money = 500;
+
+        const userB = new User();
+        userB.name = 'Valeria';
+        userB.email = 'valeria.izvoreanu@gmail.com';
+        userB.address = 'Str. Albastrelelor Nr. 2';
+        userB.money = 500;
+
+        await userRepository.save(userA);
+        await userRepository.save(userB);
+
         await foodRepository.query('DELETE FROM food_item');
         await restaurantRepository.query('DELETE FROM restaurant');
 
