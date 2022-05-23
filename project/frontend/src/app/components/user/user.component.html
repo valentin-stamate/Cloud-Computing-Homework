@@ -12,24 +12,24 @@
         <div class="field">
           <label class="label">Name</label>
           <div class="control">
-            <input class="input" type="text" value="Alex Miron">
+            <input class="input" type="text" value="{{userData.name}}">
           </div>
         </div>
   
         <div class="field">
           <label class="label">Email</label>
           <div class="control">
-            <input class="input" type="email" value="alex@mail.com">
+            <input class="input" type="email" value="{{userData.email}}">
           </div>
         </div>
   
         <div class="field">
           <label class="label">Address</label>
           <div class="control">
-            <textarea class="textarea" value="Strada Fabricii, nr 32"></textarea>
+            <textarea class="textarea">{{userData.address}}</textarea>
           </div>
         </div>
-        <div class="field is-grouped">
+        <!-- <div class="field is-grouped">
             <div class="control file">
               <label class="file-label">
                 <input class="file-input" type="file" name="file" accept=".png, .jpg">
@@ -43,7 +43,7 @@
                   </span>
               </label>
             </div>
-        </div>
+        </div> -->
         <button class="button is-primary">Update</button>
   
       </form>

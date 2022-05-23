@@ -53,9 +53,12 @@ app.get(`${Endpoints.FOOD}/:foodItemId`, Middleware.visitorMiddleware, VisitorCo
 app.get(Endpoints.SEARCH, Middleware.visitorMiddleware, VisitorController.searchFood);
 
 
+
 app.post(Endpoints.USER_LOGIN, Middleware.visitorMiddleware, AuthController.userLogin);
 app.post(Endpoints.USER_LOGIN_CODE, Middleware.visitorMiddleware, AuthController.userLoginWithCode);
 app.post(Endpoints.USER_SIGNUP, Middleware.visitorMiddleware, AuthController.userSignup);
+app.patch(Endpoints.USER_PROFILE, Middleware.userMiddleware, UserController.updateUserProfile);
+app.get(Endpoints.USER_PROFILE, Middleware.userMiddleware, UserController.getUserProfile);
 
 app.post(Endpoints.RESTAURANT_LOGIN, Middleware.visitorMiddleware, AuthController.restaurantLogin);
 app.post(Endpoints.RESTAURANT_LOGIN_CODE, Middleware.visitorMiddleware, AuthController.restaurantLoginWithCode);

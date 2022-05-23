@@ -5,6 +5,8 @@ import {FoodItem, User} from "../database/models";
 import {AppDataSource} from "../database/database";
 import {EmailDefaults, MailService, RestaurantOrderMail, UserOrderMail} from "../service/mail.service";
 import {UtilService} from "../service/util.service";
+import {UploadedFile} from "express-fileupload";
+import { StoreService } from "../service/store.service";
 
 export class UserController {
 
@@ -217,5 +219,59 @@ export class UserController {
 
         res.statusCode = StatusCode.OK;
         res.end();
+    }
+
+    static async updateUserProfile(req: Request<any>, res: Response, next: NextFunction) {
+        const token = req.get(Headers.AUTHORIZATION) as string;
+        console.log(token);
+        const user = JwtService.verifyToken(token) as User;
+        const body = req.body;
+
+        const userRepository = AppDataSource.getRepository(User);
+        const existingUser = await userRepository.findOne({
+            where:{id: user.id}
+        });
+
+        if (!existingUser) {
+            res.statusCode = StatusCode.NOT_FOUND;
+            res.end(ResponseMessage.RESTAURANT_NOT_EXISTS);
+            return;
+        }
+
+
+        if (body.name) {
+            existingUser.name = body.name;
+        }
+
+        if (body.email){
+            existingUser.email = body.email;
+        }
+        if (body.address){
+            existingUser.address = body.address;
+        }
+        await AppDataSource.manager.save(existingUser);
+        
+        res.statusCode = StatusCode.OK;
+        res.end();
+    }
+
+    static async getUserProfile(req: Request<any>, res: Response, next: NextFunction) {
+        const token = req.get(Headers.AUTHORIZATION) as string;
+        const user = JwtService.verifyToken(token) as User;
+
+        const userRepository = AppDataSource.getRepository(User);
+        const existingUser = await userRepository.findOne({
+            where:{id: user.id}
+        });
+
+        if (!existingUser) {
+            res.statusCode = StatusCode.NOT_FOUND;
+            res.end(ResponseMessage.RESTAURANT_NOT_EXISTS);
+            return;
+        }
+
+
+        res.statusCode = StatusCode.OK;
+        res.end(existingUser);
     }
 }
