@@ -10,12 +10,12 @@
       <div class="food-item-container" *ngFor="let item of foodItems">
         <div class="food-item">
           <div class="food-item-info">
-            <div class="title is-4"><b>{{item.name}}</b></div>
+            <div class="title is-4"><a (click)="goTo(item)"><b>{{item.name}}</b></a></div>
             <div class="">{{item.details}}</div>
             <div class="title is-6">{{item.price}}lei</div>
           </div>
 
-          <img class="food-photo" src="{{item.photoUrl}}" alt="">
+          <img class="food-photo" src="{{item.photoUrl}}">
         </div>
       </div>
 
@@ -27,7 +27,7 @@
     <div class="restaurant-items-container">
 
       <div class="restaurant-item-container" *ngFor="let item of restaurants">
-        <a class="restaurant-item" href="/restaurant?id={{item.id}}">
+        <div class="restaurant-item">
 
           <div class="photo-cover">
             <img class="cover" src="{{item.coverPhotoUrl}}" alt="">
@@ -36,7 +36,7 @@
 
           <div class="title is-4">{{item.name}}</div>
 
-        </a>
+        </div>
       </div>
 
     </div>

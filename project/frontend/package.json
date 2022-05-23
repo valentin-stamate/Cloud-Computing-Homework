@@ -22,6 +22,7 @@
     "@auth0/angular-jwt": "^5.0.2",
     "axios": "^0.27.2",
     "bulma": "^0.9.4",
+    "chart.js": "^3.7.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

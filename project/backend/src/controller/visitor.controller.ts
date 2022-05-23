@@ -54,13 +54,14 @@ export class VisitorController {
             where: {
                 id: foodItemId,
             },
-            relations: ['restaurant'],
+            relations: ['restaurant','priceHistory'],
         });
 
         if (!existingFood) {
             next(new ResponseError(ResponseMessage.FOOD_NOT_EXISTS, StatusCode.NOT_FOUND));
             return;
         }
+
 
         res.contentType(ContentType.JSON);
         res.end(JSON.stringify(existingFood));
