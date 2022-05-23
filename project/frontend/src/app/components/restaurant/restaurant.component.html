@@ -18,7 +18,7 @@
       <div class="food-item-container" *ngFor="let item of restaurantFood">
         <div class="food-item">
           <div class="food-item-info">
-            <div class="title is-4"><b>{{item.name}}</b></div>
+            <div class="title is-4"><a (click)="goTo(item)"><b>{{item.name}}</b></a></div>
             <div class="">{{item.details}}</div>
             <div class="title is-6">{{item.price}}lei</div>
           </div>

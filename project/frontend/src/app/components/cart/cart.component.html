@@ -14,10 +14,17 @@
         </div>
 
         <img class="food-photo" src="{{item.photoUrl}}" alt="">
+
+        <button class="button" (click)="onRemoveItem(item)">Delete</button>
       </div>
     </div>
 
-    <button type="button" class="button is-info">Place order. Price {{totalPrice}}</button>
+    <div>Total price: {{totalPrice}}lei</div>
+
+    <div class="buttons">
+      <button type="button" class="button is-info" [disabled]="this.totalPrice > this.fetchedUser.money" (click)="onPlaceOrder()">Pay with app's currency</button>
+      <button type="button" class="button is-info" disabled>Pay with card</button>
+    </div>
 
   </div>
 </div>

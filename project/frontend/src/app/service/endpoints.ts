@@ -1,6 +1,8 @@
-const host = 'http://localhost:8081';
+const host = 'http://localhost:8080';
 
 export class Endpoints {
+  static SEARCH = `${host}/search`;
+  static USER_PROFILE = `${host}/profile`;
   static USER_LOGIN = `${host}/login`;
   static USER_SIGNUP = `${host}/signup`;
   static USER_LOGIN_CODE = `${host}/login-code`;

@@ -39,13 +39,13 @@ export async function connectDatabase(rewrite: boolean = false) {
         userA.name = 'Valentin';
         userA.email = 'stamatevalentin125@gmail.com';
         userA.address = 'Str. Rosiorilor Nr. 4';
-        userA.money = 500;
+        userA.money = 50;
 
         const userB = new User();
         userB.name = 'Valeria';
         userB.email = 'valeria.izvoreanu@gmail.com';
         userB.address = 'Str. Albastrelelor Nr. 2';
-        userB.money = 500;
+        userB.money = 50;
 
         await userRepository.save(userA);
         await userRepository.save(userB);
@@ -53,47 +53,95 @@ export async function connectDatabase(rewrite: boolean = false) {
         await foodRepository.query('DELETE FROM food_item');
         await restaurantRepository.query('DELETE FROM restaurant');
 
-        const restaurant = new Restaurant();
-        restaurant.name = 'Fast Pizza';
-        restaurant.profilePhotoUrl = 'http://www.foodngo.it/assets/images/data/restaurant3.jpg';
-        restaurant.coverPhotoUrl = 'https://i.pinimg.com/736x/0e/b9/9c/0eb99cd32c6f85eb628c91efb51157d4.jpg';
-        restaurant.email = 'stamatevalentin125@gmail.com';
+        const restaurantA = new Restaurant();
+        restaurantA.name = 'Fast Pizza';
+        restaurantA.profilePhotoUrl = 'http://www.foodngo.it/assets/images/data/restaurant3.jpg';
+        restaurantA.coverPhotoUrl = 'https://i.pinimg.com/736x/0e/b9/9c/0eb99cd32c6f85eb628c91efb51157d4.jpg';
+        restaurantA.email = 'stamatevalentin125@gmail.com';
+
+        const restaurantB = new Restaurant();
+        restaurantB.name = 'Soup Zone';
+        restaurantB.profilePhotoUrl = 'https://s3-media0.fl.yelpcdn.com/bphoto/JUL9FChAKPGd5TYPmcJUPQ/l.jpg';
+        restaurantB.coverPhotoUrl = 'https://i.postimg.cc/DzvXY2kh/download.jpg';
+        restaurantB.email = 'stamatevalentin64@gmail.com';
+
+        const foodItemC = new FoodItem();
+        foodItemC.name = 'Pizza';
+        foodItemC.price = 25;
+        foodItemC.details = 'Faina, sare, masline, salam';
+        foodItemC.restaurant = restaurantB;
+        foodItemC.photoUrl = 'https://i.postimg.cc/gJ5LJ8wc/Zj-Nm-Yj-Rl-MDQ0-Yj-Jh-OWJj-ODc3-Mz-U3-NWVi-NGZi-OWZj-Zg-thumb.jpg';
+
+        const restaurantC = new Restaurant();
+        restaurantC.name = 'Italian';
+        restaurantC.profilePhotoUrl = 'https://i.postimg.cc/LXhZ2N80/zeama-moldoveneasca-de-pui-cu-taitei-2-720x720.jpg';
+        restaurantC.coverPhotoUrl = 'https://i.postimg.cc/rpftBvMr/pexels-malidate-van-784633.jpg';
+        restaurantC.email = 'photo.backup.vst.02@gmail.com';
+
+        const foodItemD = new FoodItem();
+        foodItemD.name = 'Pizza Medie';
+        foodItemD.price = 31;
+        foodItemD.details = 'Faina, sare, masline, salam, ardei';
+        foodItemD.restaurant = restaurantC;
+        foodItemD.photoUrl = 'https://i.postimg.cc/Rqx31mQj/pizza.jpg';
 
         const foodItemA = new FoodItem();
         foodItemA.name = 'Ciorba Radauteana';
         foodItemA.price = 20;
         foodItemA.details = 'Apa 200g, Legume 200g';
-        foodItemA.restaurant = restaurant;
+        foodItemA.restaurant = restaurantA;
         foodItemA.photoUrl = 'https://retete-culinare-cu-dana-valery.ro/cdn/recipes/ciorba-radauteana-cu-carne-de-curcan.jpg';
 
-        const priceHistory = new Price;
-        priceHistory.modifyDate = new Date();
-        priceHistory.value = 20;
-       // priceHistory.foodItem = foodItemA;
+        const priceHistoryA = new Price;
+        priceHistoryA.modifyDate = new Date('04 Apr 2022 00:12:00 GMT');
+        priceHistoryA.value = 21;
+       // priceHistoryA.foodItem = foodItemA;
 
-        foodItemA.priceHistory = [priceHistory];
+        const priceHistoryB = new Price;
+        priceHistoryB.modifyDate = new Date('10 Apr 2022 00:12:00 GMT');
+        priceHistoryB.value = 14;
+
+        const priceHistoryC = new Price;
+        priceHistoryC.modifyDate = new Date('20 Apr 2022 00:12:00 GMT');
+        priceHistoryC.value = 25;
+
+        const priceHistoryD = new Price;
+        priceHistoryD.modifyDate = new Date('25 Apr 2022 00:12:00 GMT');
+        priceHistoryD.value = 20;
+
+        foodItemA.priceHistory = [priceHistoryA, priceHistoryB, priceHistoryC, priceHistoryD];
 
         const foodItemB = new FoodItem();
         foodItemB.name = 'Ciorba de Burta';
         foodItemB.price = 21;
         foodItemB.details = 'Apa 200g, Legume 210g';
-        foodItemB.restaurant = restaurant;
+        foodItemB.restaurant = restaurantA;
         foodItemB.photoUrl = 'https://www.lauralaurentiu.ro/wp-content/uploads/2010/03/ciorba-de-burta-reteta-cu-poze-cum-se-face-ciorba-de-burta-ingrediente-mod-de-preparare-ciorba-de-burta-reteta-laura-laurentiu.jpg';
 
 
-        const priceHistoryB = new Price;
-        priceHistoryB.modifyDate = new Date();
-        priceHistoryB.value = 21;
-        //priceHistory.foodItem = foodItemB;
+        const priceHistoryE = new Price;
+        priceHistoryE.modifyDate = new Date();
+        priceHistoryE.value = 21;
+        //priceHistoryA.foodItem = foodItemB;
 
-        foodItemB.priceHistory = [priceHistoryB];
-        restaurant.foodItems = [foodItemA, foodItemB];
+        foodItemB.priceHistory = [priceHistoryE];
+        restaurantA.foodItems = [foodItemA, foodItemB];
 
-        await restaurantRepository.save(restaurant);
-        await AppDataSource.manager.save(priceHistory);
+        restaurantB.foodItems = [foodItemC];
+        restaurantC.foodItems = [foodItemD];
+
+        await restaurantRepository.save(restaurantA);
+        await restaurantRepository.save(restaurantB);
+        await restaurantRepository.save(restaurantC);
+        await AppDataSource.manager.save(priceHistoryA);
         await AppDataSource.manager.save(priceHistoryB);
+        await AppDataSource.manager.save(priceHistoryC);
+        await AppDataSource.manager.save(priceHistoryD);
+        await AppDataSource.manager.save(priceHistoryE);
         await foodRepository.save(foodItemA);
         await foodRepository.save(foodItemB);
+        await foodRepository.save(foodItemC);
+        await foodRepository.save(foodItemD);
     }
 
 

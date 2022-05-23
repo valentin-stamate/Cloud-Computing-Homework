@@ -30,8 +30,8 @@ export class MailService {
 }
 
 export enum EmailDefaults {
-    FROM = 'Blazer <stamatevalentin125@gmail.com>',
-    APP_NAME = 'Blazer or something',
+    FROM = 'FastFood <stamatevalentin125@gmail.com>',
+    APP_NAME = 'FastFood',
 }
 
 export class LoginTemplate {

@@ -18,7 +18,7 @@ const app = express();
 const port = env.PORT;
 const host = `http://localhost:${port}`;
 
-connectDatabase(false).catch(err => {
+connectDatabase(true).catch(err => {
     console.log(err);
 });
 
@@ -32,7 +32,7 @@ app.use(express.urlencoded({extended: true}));
 
 // Handle logs in console during development
 app.use(morgan('dev'));
-app.use(cors({origin: ['http://localhost:4200']}));
+app.use(cors({origin: '*'}));
 // if (process.env.NODE_ENV === 'development') {
 // }
 
@@ -50,8 +50,7 @@ app.get(Endpoints.LAST_FOOD, Middleware.visitorMiddleware, VisitorController.get
 app.get(Endpoints.LAST_RESTAURANTS, Middleware.visitorMiddleware, VisitorController.getLastRestaurants);
 app.get(`${Endpoints.RESTAURANT}/:restaurantId`, Middleware.visitorMiddleware, VisitorController.getRestaurant);
 app.get(`${Endpoints.FOOD}/:foodItemId`, Middleware.visitorMiddleware, VisitorController.getFoodItem);
-app.get(Endpoints.SEARCH, Middleware.visitorMiddleware, VisitorController.searchFood);
-
+app.post(Endpoints.SEARCH, Middleware.visitorMiddleware, VisitorController.searchFood);
 
 
 app.post(Endpoints.USER_LOGIN, Middleware.visitorMiddleware, AuthController.userLogin);
@@ -68,7 +67,7 @@ app.post(Endpoints.ORDER, Middleware.userMiddleware, UserController.makeOrder);
 
 app.get(Endpoints.USER_CART, Middleware.userMiddleware, UserController.getUserCart);
 app.post(Endpoints.USER_CART, Middleware.userMiddleware, UserController.addFoodItemUserCart);
-app.delete(Endpoints.USER_CART, Middleware.userMiddleware, UserController.deleteFoodItemUserCart);
+app.delete(`${Endpoints.USER_CART}/:id`, Middleware.userMiddleware, UserController.deleteFoodItemUserCart);
 
 app.post(Endpoints.RESTAURANT_FOOD_ITEM, Middleware.restaurantMiddleware, RestaurantController.addFoodItem);
 app.get(Endpoints.RESTAURANT_FOOD_ITEM, Middleware.restaurantMiddleware, RestaurantController.getRestaurantFoodItems);

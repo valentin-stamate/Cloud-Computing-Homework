@@ -4,6 +4,7 @@ import {Cookies, CookieService} from "../../service/cookie.service";
 import {JwtService} from "../../service/jwt.service";
 import {FoodItem, Restaurant} from "../../service/models";
 import {Endpoints} from "../../service/endpoints";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-restaurant-profile',
@@ -16,7 +17,7 @@ export class RestaurantProfileComponent implements OnInit {
   id: number = 0;
   restaurant: Restaurant = {} as Restaurant;
 
-  constructor() {
+  constructor(private router: Router) {
     const token = CookieService.readCookie(Cookies.AUTH);
     const restaurantPayload = JwtService.decodeJWT(token) as Restaurant;
     this.id = restaurantPayload.id;
@@ -60,6 +61,12 @@ export class RestaurantProfileComponent implements OnInit {
         console.log(err);
       });
 
+  }
+
+  goTo(item : FoodItem ){
+    this.router.navigate(['/dish'], {
+      queryParams: {item:JSON.stringify(item.id)}
+    })
   }
 
 }

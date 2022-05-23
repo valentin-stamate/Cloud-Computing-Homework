@@ -39,8 +39,9 @@ export class HomeComponent implements OnInit {
       }).catch(err => {
 
     });
-    
+
   }
+
   goTo(item : FoodItem ){
     this.router.navigate(['/dish'], {
       queryParams: {item:JSON.stringify(item.id)}

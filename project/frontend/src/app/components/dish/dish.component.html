@@ -3,11 +3,11 @@
 
 <div class="restaurant-container">
     <div class="restaurant-items">
-  
+
       <div class="restaurant-cover">
         <img class="food-container" src="{{item.photoUrl}}" alt="">
       </div>
-  
+
       <div class="title information">{{item.restaurant.name}}: {{item.name}}</div>
 
       <div class = "subtitle">
@@ -19,8 +19,8 @@
         <canvas id="myChart" width="100" height="100"></canvas>
       </div>
       <div class="add">
-        <button type="button" [disabled]="setDisabled" id="add-button" class="btn-basket btn btn-success" (click)="addToBasket(item)">Add to basket</button> 
+        <button *ngIf="logged" type="button" [disabled]="setDisabled" id="add-button" class="btn-basket btn btn-success" (click)="addToBasket(item)">Add to basket</button>
+        <button *ngIf="!logged" type="button" class="btn-basket btn btn-success" disabled>Log in first</button>
       </div>
     </div>
   </div>
-  

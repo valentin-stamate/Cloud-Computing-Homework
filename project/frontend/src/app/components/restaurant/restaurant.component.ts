@@ -3,6 +3,7 @@ import {UrlService} from "../../service/url.service";
 import axios from "axios";
 import {Endpoints} from "../../service/endpoints";
 import {FoodItem, Restaurant} from "../../service/models";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-restaurant',
@@ -15,7 +16,7 @@ export class RestaurantComponent implements OnInit {
   restaurantData: Restaurant = {} as Restaurant;
   restaurantFood: FoodItem[] = [];
 
-  constructor() {
+  constructor(private router: Router) {
     const id = UrlService.getParameterByName('id');
 
     if (!id) {
@@ -37,6 +38,12 @@ export class RestaurantComponent implements OnInit {
       }).catch(err => {
       console.log(err);
     });
+  }
+
+  goTo(item : FoodItem ){
+    this.router.navigate(['/dish'], {
+      queryParams: {item:JSON.stringify(item.id)}
+    })
   }
 
 }

@@ -97,7 +97,7 @@ export class VisitorController {
         if (foodList.length !==0){
             res.end(JSON.stringify(foodList));
         }else{
-            res.end("No Item Found");
+            res.end(JSON.stringify([]));
         }
         
     }

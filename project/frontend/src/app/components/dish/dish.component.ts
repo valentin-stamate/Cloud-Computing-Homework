@@ -24,8 +24,11 @@ export class DishComponent implements OnInit {
   dates : string[];
   prices : string[];
   myChart:any;
+
+  logged = false;
+
   constructor(private route: ActivatedRoute, private router: Router, private elementRef: ElementRef) {
-   this.item ={ 
+   this.item ={
         id: 0,
         name: '',
         price: 0,
@@ -47,6 +50,8 @@ export class DishComponent implements OnInit {
     if (!token) {
       return;
     }
+
+    this.logged = true;
     const decodedToken = JwtService.decodeJWT(token);
 
     this.config = {
@@ -55,7 +60,7 @@ export class DishComponent implements OnInit {
       }
     };
 
-    
+
    }
 
   ngOnInit(): void {
@@ -66,12 +71,12 @@ export class DishComponent implements OnInit {
       axios.get(`${Endpoints.FOOD}/${this.id}`).then(res => {
           this.item = res.data;
           this.dates = this.getDates(this.item);
-          this.prices = this.getPrices(this.item); 
+          this.prices = this.getPrices(this.item);
           this.buildChart();
         }).catch(err => {
 
         });
-        
+
   }
   addToBasket(item : FoodItem){
 
@@ -83,7 +88,7 @@ export class DishComponent implements OnInit {
       }).catch(err => {
 
       }).finally(() => {
-        window.location.href = '/home';
+
       });
   }
 

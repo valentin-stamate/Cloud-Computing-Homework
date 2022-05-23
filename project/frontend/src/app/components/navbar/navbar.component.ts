@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Cookies, CookieService} from "../../service/cookie.service";
-import {AxiosRequestConfig} from "axios";
+import axios, {AxiosRequestConfig} from "axios";
 import {JwtService} from "../../service/jwt.service";
-import {FoodItem, Restaurant} from "../../service/models";
+import {FoodItem, Restaurant, User} from "../../service/models";
+import {Endpoints} from "../../service/endpoints";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
@@ -18,8 +20,9 @@ export class NavbarComponent implements OnInit {
   searchBoxOpen = false;
 
   user: any = {};
+  fetchedUser: User = {} as User;
 
-  constructor() {
+  constructor(private router: Router) {
     const token = CookieService.readCookie(Cookies.AUTH);
 
     if (!token) {
@@ -40,30 +43,43 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.userType === 1) {
+      this.refreshUserProfile();
+    }
+  }
+
+  refreshUserProfile() {
+    axios.get(Endpoints.USER_PROFILE, this.config)
+      .then(res => {
+        this.fetchedUser = res.data;
+      }).catch(err => {
+        console.log(err);
+      });
   }
 
   onSearch(searchInput: HTMLInputElement) {
     const searchValue = searchInput.value;
     this.searchBoxOpen = true;
 
-    /* Demo */
+    const formData = new FormData();
+    formData.append('searchText', searchValue);
 
-    const foodItem = {
-      id: 1,
-      name: 'Ciorba',
-      price: 31,
-      details: 'dasdd',
-      photoUrl: 'https://retete-culinare-cu-dana-valery.ro/cdn/recipes/ciorba-radauteana-cu-carne-de-curcan.jpg',
-      restaurant: {} as Restaurant,
-    };
+    axios.post(Endpoints.SEARCH, formData)
+      .then(res => {
+        this.searchedFood = res.data;
+      }).catch(err => {
 
-    this.searchedFood.push(foodItem);
-    this.searchedFood.push(foodItem);
-    this.searchedFood.push(foodItem);
+      });
   }
 
   onSearchClose() {
     this.searchBoxOpen = false;
+  }
+
+  goTo(item : FoodItem ){
+    this.router.navigate(['/dish'], {
+      queryParams: {item:JSON.stringify(item.id)}
+    })
   }
 
 }

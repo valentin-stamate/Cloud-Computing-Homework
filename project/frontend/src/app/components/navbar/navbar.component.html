@@ -1,7 +1,7 @@
 <div class="navbar-container">
   <div class="navbar-items">
 
-    <div class="logo"></div>
+    <img class="logo" src="assets/logo.png" routerLink="/">
 
     <div class="is-flex" style="gap: 16px">
       <div class="control has-icons-left has-icons-right" style="position: relative">
@@ -13,7 +13,7 @@
         <div class="search-box" *ngIf="searchBoxOpen">
           <div class="searched-food-item" *ngFor="let item of searchedFood">
             <img class="searched-food-image" src="{{item.photoUrl}}" alt="">
-            <div>{{item.name}}</div>
+            <a (click)="goTo(item)">{{item.name}}</a>
 
             <div class="is-flex-grow-1"></div>
 
@@ -31,7 +31,7 @@
     <div class="is-flex-grow-1"></div>
 
     <div *ngIf="logged && userType === 1"><a routerLink="/cart" class="fa-solid fa-cart-shopping"></a></div>
-    <div *ngIf="logged && userType === 1">{{'300'}}C</div>
+    <div *ngIf="logged && userType === 1">{{fetchedUser.money}}C</div>
     <a routerLink="/user-profile" class="title is-6" *ngIf="logged && userType === 1">{{user.name}}</a>
     <a routerLink="/restaurant-profile" class="title is-6" *ngIf="logged && userType === 2">{{user.name}}</a>
     <button type="button" routerLink="/login" class="button is-primary" *ngIf="!logged">Login</button>

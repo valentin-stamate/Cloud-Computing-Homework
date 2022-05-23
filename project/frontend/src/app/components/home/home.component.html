@@ -15,19 +15,19 @@
             <div class="title is-6">{{item.price}}lei</div>
           </div>
 
-          <img class="food-photo" src="{{item.photoUrl}}">
+          <img class="food-photo" src="{{item.photoUrl}}" alt="">
         </div>
       </div>
 
 
     </div>
 
-    <div class="title">Top restaurante</div>
+    <div class="title">Restaurante</div>
 
     <div class="restaurant-items-container">
 
       <div class="restaurant-item-container" *ngFor="let item of restaurants">
-        <div class="restaurant-item">
+        <a class="restaurant-item" href="/restaurant?id={{item.id}}">
 
           <div class="photo-cover">
             <img class="cover" src="{{item.coverPhotoUrl}}" alt="">
@@ -36,7 +36,7 @@
 
           <div class="title is-4">{{item.name}}</div>
 
-        </div>
+        </a>
       </div>
 
     </div>

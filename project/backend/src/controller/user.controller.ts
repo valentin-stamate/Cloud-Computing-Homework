@@ -5,8 +5,6 @@ import {FoodItem, User} from "../database/models";
 import {AppDataSource} from "../database/database";
 import {EmailDefaults, MailService, RestaurantOrderMail, UserOrderMail} from "../service/mail.service";
 import {UtilService} from "../service/util.service";
-import {UploadedFile} from "express-fileupload";
-import { StoreService } from "../service/store.service";
 
 export class UserController {
 
@@ -15,8 +13,9 @@ export class UserController {
         const user = JwtService.verifyToken(token) as User;
 
         const userRepository = AppDataSource.getRepository(User);
-        const existingUser = await userRepository.findOneBy({
-            id: user.id,
+        const existingUser = await userRepository.findOne({
+            where: {id: user.id,},
+            relations:["foodItems"],
         });
 
         if (!existingUser) {
@@ -36,8 +35,20 @@ export class UserController {
         const separateFoodByEmail = new Map<string, FoodItem[]>();
         let totalPrice = 0;
 
+        const foodRepository = AppDataSource.getRepository(FoodItem);
+
         for (let foodItem of foodList) {
-            const email = foodItem.restaurant.email;
+            const existingFoodItem = await foodRepository.findOne({
+                where: {id: foodItem.id},
+                relations:["restaurant"],
+            });
+
+            if (!existingFoodItem) {
+                console.log('Something went wrong');
+                continue;
+            }
+
+            const email = existingFoodItem.restaurant.email;
             totalPrice += foodItem.price;
 
             const restaurantFoodListOrder = separateFoodByEmail.get(email);
@@ -65,6 +76,7 @@ export class UserController {
                 const emailHtml = RestaurantOrderMail.getHtml(existingUser.address, partialPrice, foodList);
 
                 await MailService.sendMail({
+                    subject: "[Order] FastFood",
                     from: EmailDefaults.FROM,
                     to: email,
                     html: emailHtml,
@@ -76,7 +88,8 @@ export class UserController {
                 existingUser.money -= partialPrice;
                 successfulPrice += partialPrice;
 
-                UtilService.removeArrayFromOtherArray(user.foodItems, foodList);
+                // UtilService.removeArrayFromOtherArray(user.foodItems, foodList);
+                existingUser.foodItems = [];
                 await AppDataSource.manager.save(existingUser);
             } catch (err) {
                 console.log(err);
@@ -88,6 +101,7 @@ export class UserController {
             const userOrderHtmlEmail = UserOrderMail.getHtml(existingUser.address, successfulPrice, successfulFood);
 
             await MailService.sendMail({
+                subject: "[Order] FastFood",
                 from: EmailDefaults.FROM,
                 to: existingUser.email,
                 html: userOrderHtmlEmail,
@@ -120,7 +134,7 @@ export class UserController {
 
         if (!foodList || foodList.length === 0) {
             res.statusCode = StatusCode.OK;
-            res.end(ResponseMessage.EMPTY_CART);
+            res.end(JSON.stringify([]));
             return;
         }
 
@@ -179,14 +193,13 @@ export class UserController {
     static async deleteFoodItemUserCart(req: Request<any>, res: Response, next: NextFunction) {
         const token = req.get(Headers.AUTHORIZATION) as string;
         const user = JwtService.verifyToken(token) as User;
-        const body = req.body;
+        const foodItemId = req.params.id;
 
-        if (!body.foodId) {
+        if (!foodItemId) {
             res.statusCode = StatusCode.BAD_REQUEST;
             res.end(ResponseMessage.INVALID_FORM);
             return;
         }
-
 
         const userRepository = AppDataSource.getRepository(User);
         const existingUser = await userRepository.findOne({
@@ -202,7 +215,7 @@ export class UserController {
 
         const foodItemRepository = AppDataSource.getRepository(FoodItem);
         const existingFoodItem = await foodItemRepository.findOneBy({
-            id: body.foodId,
+            id: foodItemId,
         });
 
         if (!existingFoodItem) {
@@ -212,7 +225,7 @@ export class UserController {
         }
         
         existingUser.foodItems = existingUser.foodItems?.filter(foodItem => {
-            return foodItem.id != body.foodId
+            return foodItem.id != parseInt(foodItemId);
         });
         await AppDataSource.manager.save(existingUser);
 
@@ -272,6 +285,6 @@ export class UserController {
 
 
         res.statusCode = StatusCode.OK;
-        res.end(existingUser);
+        res.end(JSON.stringify(existingUser));
     }
 }

@@ -46,6 +46,7 @@ export class AuthController {
         try {
             const mailHtml = LoginTemplate.getHtml(randomCode);
             await MailService.sendMail({
+                subject: "[Login] FastFood",
                 from: EmailDefaults.FROM,
                 to: existingUser.email,
                 html: mailHtml,
@@ -174,6 +175,7 @@ export class AuthController {
         try {
             const mailHtml = LoginTemplate.getHtml(randomCode);
             await MailService.sendMail({
+                subject: "[Login] FastFood",
                 from: EmailDefaults.FROM,
                 to: existingRestaurant.email,
                 html: mailHtml,
