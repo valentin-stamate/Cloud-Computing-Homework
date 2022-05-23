@@ -1,4 +1,4 @@
-const host = 'http://localhost:8080';
+const host = 'http://localhost:8081';
 
 export class Endpoints {
   static USER_LOGIN = `${host}/login`;

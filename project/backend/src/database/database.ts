@@ -66,6 +66,13 @@ export async function connectDatabase(rewrite: boolean = false) {
         foodItemA.restaurant = restaurant;
         foodItemA.photoUrl = 'https://retete-culinare-cu-dana-valery.ro/cdn/recipes/ciorba-radauteana-cu-carne-de-curcan.jpg';
 
+        const priceHistory = new Price;
+        priceHistory.modifyDate = new Date();
+        priceHistory.value = 20;
+       // priceHistory.foodItem = foodItemA;
+
+        foodItemA.priceHistory = [priceHistory];
+
         const foodItemB = new FoodItem();
         foodItemB.name = 'Ciorba de Burta';
         foodItemB.price = 21;
@@ -73,9 +80,18 @@ export async function connectDatabase(rewrite: boolean = false) {
         foodItemB.restaurant = restaurant;
         foodItemB.photoUrl = 'https://www.lauralaurentiu.ro/wp-content/uploads/2010/03/ciorba-de-burta-reteta-cu-poze-cum-se-face-ciorba-de-burta-ingrediente-mod-de-preparare-ciorba-de-burta-reteta-laura-laurentiu.jpg';
 
+
+        const priceHistoryB = new Price;
+        priceHistoryB.modifyDate = new Date();
+        priceHistoryB.value = 21;
+        //priceHistory.foodItem = foodItemB;
+
+        foodItemB.priceHistory = [priceHistoryB];
         restaurant.foodItems = [foodItemA, foodItemB];
 
         await restaurantRepository.save(restaurant);
+        await AppDataSource.manager.save(priceHistory);
+        await AppDataSource.manager.save(priceHistoryB);
         await foodRepository.save(foodItemA);
         await foodRepository.save(foodItemB);
     }
