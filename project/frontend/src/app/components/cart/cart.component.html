@@ -1,0 +1,23 @@
+<app-navbar></app-navbar>
+
+<div class="page-container">
+  <div class="page-content pt-4 is-align-items-flex-start" style="width: min(100%, 512px)">
+
+    <div class="title">Cart</div>
+
+    <div class="food-item-container" *ngFor="let item of foodItems">
+      <div class="food-item">
+        <div class="food-item-info">
+          <div class="title is-4"><b>{{item.name}}</b></div>
+          <div class="">{{item.details}}</div>
+          <div class="title is-6">{{item.price}}lei</div>
+        </div>
+
+        <img class="food-photo" src="{{item.photoUrl}}" alt="">
+      </div>
+    </div>
+
+    <button type="button" class="button is-info">Place order. Price {{totalPrice}}</button>
+
+  </div>
+</div>

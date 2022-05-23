@@ -28,10 +28,9 @@
     </div>
 
 
-
-
     <div class="is-flex-grow-1"></div>
 
+    <div *ngIf="logged && userType === 1"><a routerLink="/cart" class="fa-solid fa-cart-shopping"></a></div>
     <div *ngIf="logged && userType === 1">{{'300'}}C</div>
     <a routerLink="/user-profile" class="title is-6" *ngIf="logged && userType === 1">{{user.name}}</a>
     <a routerLink="/restaurant-profile" class="title is-6" *ngIf="logged && userType === 2">{{user.name}}</a>

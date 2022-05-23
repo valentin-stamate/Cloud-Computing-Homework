@@ -13,6 +13,7 @@ import { OwnerComponent } from './components/owner/owner.component';
 import { BasketComponent } from './components/basket/basket.component';
 import { UserComponent } from './components/user/user.component';
 import { RestaurantProfileComponent } from './components/restaurant-profile/restaurant-profile.component';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { RestaurantProfileComponent } from './components/restaurant-profile/rest
     OwnerComponent,
     BasketComponent,
     UserComponent,
-    RestaurantProfileComponent
+    RestaurantProfileComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
