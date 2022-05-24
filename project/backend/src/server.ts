@@ -18,7 +18,7 @@ const app = express();
 const port = env.PORT;
 const host = `http://localhost:${port}`;
 
-connectDatabase(true).catch(err => {
+connectDatabase(false).catch(err => {
     console.log(err);
 });
 
